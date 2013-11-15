@@ -1,0 +1,4 @@
+homepage_blog:
+    resource: "@HomepageBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+

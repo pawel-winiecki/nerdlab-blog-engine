@@ -1,0 +1,35 @@
+PostsCategories:
+    type: entity
+    table: PostsCategories
+    fields:
+        idPostsCategory:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: idPostsCategory
+            generator:
+                strategy: IDENTITY
+        categoryName:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+            column: categoryName
+        description:
+            type: text
+            nullable: true
+            column: description
+        createdOn:
+            type: datetime
+            nullable: true
+            column: createdOn
+        updatedOn:
+            type: datetime
+            nullable: true
+            column: updatedOn
+        isactive:
+            type: boolean
+            nullable: true
+            column: isActive
+    lifecycleCallbacks: {  }
