@@ -1,3 +1,11 @@
-{% for post in posts %}
-<p>{{ post.getTitle() }}</p>
-{% endfor %}
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    {% if posts %}
+        {% for post in posts %}
+            <p>{{ post.getTitle() }}</p>
+        {% endfor %}
+    {% else %}
+            <p>Nie ma postów</p>
+    {% endif %}
+{% endblock %}
