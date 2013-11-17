@@ -3,7 +3,9 @@
 {% block main %}
     {% if posts %}
         {% for post in posts %}
-            <p>{{ post.getTitle() }}</p>
+            <h2>{{ post.getTitle() }}</h2>
+            <p>{{ post.getShortContent() }}</p>
+            <a href="post/{{ post.getLink() }}" />czytaj więcej</a>
         {% endfor %}
     {% else %}
             <p>Nie ma postów</p>

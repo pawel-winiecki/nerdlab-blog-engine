@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    {% if post %}
+        <h2>{{ post.getTitle() }}</h2>
+        <p>{{ post.getLongContent() }}</p>
+    {% else %}
+            <p>Nie ma takiego wpisu!</p>
+    {% endif %}
+{% endblock %}

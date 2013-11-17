@@ -1,3 +1,6 @@
 homepage_blog_homepage:
     pattern:  /
     defaults: { _controller: HomepageBlogBundle:Default:index }
+homepage_blog_posts:
+    pattern:  /post/{link}
+    defaults: { _controller: HomepageBlogBundle:Posts:showPost }
