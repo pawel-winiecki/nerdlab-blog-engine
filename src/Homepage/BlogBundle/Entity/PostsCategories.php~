@@ -1,0 +1,167 @@
+<?php
+
+namespace Homepage\BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PostsCategories
+ */
+class PostsCategories
+{
+    /**
+     * @var integer
+     */
+    private $idPostsCategory;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdon;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedon;
+
+    /**
+     * @var boolean
+     */
+    private $isactive;
+
+
+    /**
+     * Get idPostsCategory
+     *
+     * @return integer 
+     */
+    public function getIdPostsCategory()
+    {
+        return $this->idPostsCategory;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return PostsCategories
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return PostsCategories
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set createdon
+     *
+     * @param \DateTime $createdon
+     * @return PostsCategories
+     */
+    public function setCreatedon($createdon)
+    {
+        $this->createdon = $createdon;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdon
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedon()
+    {
+        return $this->createdon;
+    }
+
+    /**
+     * Set updatedon
+     *
+     * @param \DateTime $updatedon
+     * @return PostsCategories
+     */
+    public function setUpdatedon($updatedon)
+    {
+        $this->updatedon = $updatedon;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedon
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedon()
+    {
+        return $this->updatedon;
+    }
+
+    /**
+     * Set isactive
+     *
+     * @param boolean $isactive
+     * @return PostsCategories
+     */
+    public function setIsactive($isactive)
+    {
+        $this->isactive = $isactive;
+    
+        return $this;
+    }
+
+    /**
+     * Get isactive
+     *
+     * @return boolean 
+     */
+    public function getIsactive()
+    {
+        return $this->isactive;
+    }
+}

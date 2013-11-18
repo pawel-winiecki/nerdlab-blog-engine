@@ -1,8 +1,8 @@
-PostsCategory:
+Postscategories:
     type: entity
     table: PostsCategories
     fields:
-        idPostsCategory:
+        idpostscategory:
             id: true
             type: integer
             unsigned: false
@@ -10,7 +10,7 @@ PostsCategory:
             column: idPostsCategory
             generator:
                 strategy: IDENTITY
-        categoryName:
+        categoryname:
             type: string
             length: 45
             fixed: false
@@ -19,12 +19,11 @@ PostsCategory:
         description:
             type: text
             nullable: true
-            column: description
-        createdOn:
+        createdon:
             type: datetime
             nullable: true
             column: createdOn
-        updatedOn:
+        updatedon:
             type: datetime
             nullable: true
             column: updatedOn

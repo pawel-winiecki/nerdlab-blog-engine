@@ -1,54 +1,41 @@
-Posts:
+Comments:
     type: entity
-    table: Posts
+    table: Comments
     fields:
-        idpost:
+        idcomment:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idPost
+            column: idComment
             generator:
                 strategy: IDENTITY
-        link:
+        content:
             type: string
-            length: 45
+            length: 500
             fixed: false
             nullable: false
-        title:
-            type: string
-            length: 45
-            fixed: false
-            nullable: false
-        shortcontent:
-            type: text
-            nullable: false
-            column: shortContent
-        longcontent:
-            type: text
-            nullable: false
-            column: longContent
         createdon:
             type: datetime
             nullable: true
             column: createdOn
-        updatedon:
+        uptadedon:
             type: datetime
             nullable: true
-            column: updatedOn
+            column: uptadedOn
         isactive:
             type: boolean
             nullable: true
             column: isActive
     manyToOne:
-        postscategoriespostscategory:
-            targetEntity: Postscategories
+        postspost:
+            targetEntity: Posts
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                PostsCategories_idPostsCategory:
-                    referencedColumnName: idPostsCategory
+                Posts_idPost:
+                    referencedColumnName: idPost
             orphanRemoval: false
         usersuser:
             targetEntity: Users

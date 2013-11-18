@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Posts
  */
-class Posts
+class Post
 {
     /**
      * @var integer
@@ -50,7 +50,7 @@ class Posts
     private $isActive;
 
     /**
-     * @var \Homepage\BlogBundle\Entity\PostsCategories
+     * @var \Homepage\BlogBundle\Entity\PostsCategory
      */
     private $postsCategoriesPostsCategory;
 
@@ -69,7 +69,7 @@ class Posts
      * Set link
      *
      * @param string $link
-     * @return Posts
+     * @return Post
      */
     public function setLink($link)
     {
@@ -92,7 +92,7 @@ class Posts
      * Set title
      *
      * @param string $title
-     * @return Posts
+     * @return Post
      */
     public function setTitle($title)
     {
@@ -115,7 +115,7 @@ class Posts
      * Set shortContent
      *
      * @param string $shortContent
-     * @return Posts
+     * @return Post
      */
     public function setShortContent($shortContent)
     {
@@ -138,7 +138,7 @@ class Posts
      * Set longContent
      *
      * @param string $longContent
-     * @return Posts
+     * @return Post
      */
     public function setLongContent($longContent)
     {
@@ -161,7 +161,7 @@ class Posts
      * Set createdOn
      *
      * @param \DateTime $createdOn
-     * @return Posts
+     * @return Post
      */
     public function setCreatedOn($createdOn)
     {
@@ -184,7 +184,7 @@ class Posts
      * Set updatedOn
      *
      * @param \DateTime $updatedOn
-     * @return Posts
+     * @return Post
      */
     public function setUpdatedOn($updatedOn)
     {
@@ -207,7 +207,7 @@ class Posts
      * Set isActive
      *
      * @param boolean $isActive
-     * @return Posts
+     * @return Post
      */
     public function setIsActive($isActive)
     {
@@ -229,10 +229,10 @@ class Posts
     /**
      * Set postsCategoriesPostsCategory
      *
-     * @param \Homepage\BlogBundle\Entity\PostsCategories $postsCategoriesPostsCategory
-     * @return Posts
+     * @param \Homepage\BlogBundle\Entity\PostsCategory $postsCategoriesPostsCategory
+     * @return Post
      */
-    public function setPostsCategoriesPostsCategory(\Homepage\BlogBundle\Entity\PostsCategories $postsCategoriesPostsCategory = null)
+    public function setPostsCategoriesPostsCategory(\Homepage\BlogBundle\Entity\PostsCategory $postsCategoriesPostsCategory = null)
     {
         $this->postsCategoriesPostsCategory = $postsCategoriesPostsCategory;
     

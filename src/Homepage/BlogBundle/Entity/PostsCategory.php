@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PostsCategories
  */
-class PostsCategories
+class PostsCategory
 {
     /**
      * @var integer
@@ -54,7 +54,7 @@ class PostsCategories
      * Set categoryName
      *
      * @param string $categoryName
-     * @return PostsCategories
+     * @return PostsCategory
      */
     public function setCategoryName($categoryName)
     {
@@ -77,7 +77,7 @@ class PostsCategories
      * Set description
      *
      * @param string $description
-     * @return PostsCategories
+     * @return PostsCategory
      */
     public function setDescription($description)
     {
@@ -100,7 +100,7 @@ class PostsCategories
      * Set createdOn
      *
      * @param \DateTime $createdOn
-     * @return PostsCategories
+     * @return PostsCategory
      */
     public function setCreatedOn($createdOn)
     {
@@ -123,7 +123,7 @@ class PostsCategories
      * Set updatedOn
      *
      * @param \DateTime $updatedOn
-     * @return PostsCategories
+     * @return PostsCategory
      */
     public function setUpdatedOn($updatedOn)
     {
@@ -146,7 +146,7 @@ class PostsCategories
      * Set isActive
      *
      * @param boolean $isActive
-     * @return PostsCategories
+     * @return PostsCategory
      */
     public function setIsActive($isActive)
     {
@@ -163,5 +163,15 @@ class PostsCategories
     public function getIsActive()
     {
         return $this->isActive;
+    }
+    
+    /**
+     * Required by admin bundle
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->categoryName;
     }
 }

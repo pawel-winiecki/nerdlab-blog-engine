@@ -1,4 +1,4 @@
-Homepage\BlogBundle\Entity\Posts:
+Homepage\BlogBundle\Entity\Post:
     type: entity
     table: Posts
     fields:
@@ -42,7 +42,7 @@ Homepage\BlogBundle\Entity\Posts:
             column: isActive
     manyToOne:
         postsCategoriesPostsCategory:
-            targetEntity: PostsCategories
+            targetEntity: PostsCategory
             cascade: {  }
             mappedBy: null
             inversedBy: null

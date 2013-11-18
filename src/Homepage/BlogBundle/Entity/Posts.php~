@@ -1,0 +1,251 @@
+<?php
+
+namespace Homepage\BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Posts
+ */
+class Posts
+{
+    /**
+     * @var integer
+     */
+    private $idpost;
+
+    /**
+     * @var string
+     */
+    private $link;
+
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $shortEntry;
+
+    /**
+     * @var string
+     */
+    private $longcontent;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdon;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedon;
+
+    /**
+     * @var boolean
+     */
+    private $isactive;
+
+    /**
+     * @var \Homepage\BlogBundle\Entity\PostsCategories
+     */
+    private $postscategoriespostscategory;
+
+
+    /**
+     * Get idpost
+     *
+     * @return integer 
+     */
+    public function getIdpost()
+    {
+        return $this->idpost;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     * @return Posts
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string 
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Posts
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set shortEntry
+     *
+     * @param string $shortEntry
+     * @return Posts
+     */
+    public function setShortEntry($shortEntry)
+    {
+        $this->shortEntry = $shortEntry;
+    
+        return $this;
+    }
+
+    /**
+     * Get shortEntry
+     *
+     * @return string 
+     */
+    public function getShortEntry()
+    {
+        return $this->shortEntry;
+    }
+
+    /**
+     * Set longcontent
+     *
+     * @param string $longcontent
+     * @return Posts
+     */
+    public function setLongcontent($longcontent)
+    {
+        $this->longcontent = $longcontent;
+    
+        return $this;
+    }
+
+    /**
+     * Get longcontent
+     *
+     * @return string 
+     */
+    public function getLongcontent()
+    {
+        return $this->longcontent;
+    }
+
+    /**
+     * Set createdon
+     *
+     * @param \DateTime $createdon
+     * @return Posts
+     */
+    public function setCreatedon($createdon)
+    {
+        $this->createdon = $createdon;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdon
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedon()
+    {
+        return $this->createdon;
+    }
+
+    /**
+     * Set updatedon
+     *
+     * @param \DateTime $updatedon
+     * @return Posts
+     */
+    public function setUpdatedon($updatedon)
+    {
+        $this->updatedon = $updatedon;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedon
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedon()
+    {
+        return $this->updatedon;
+    }
+
+    /**
+     * Set isactive
+     *
+     * @param boolean $isactive
+     * @return Posts
+     */
+    public function setIsactive($isactive)
+    {
+        $this->isactive = $isactive;
+    
+        return $this;
+    }
+
+    /**
+     * Get isactive
+     *
+     * @return boolean 
+     */
+    public function getIsactive()
+    {
+        return $this->isactive;
+    }
+
+    /**
+     * Set postscategoriespostscategory
+     *
+     * @param \Homepage\BlogBundle\Entity\PostsCategories $postscategoriespostscategory
+     * @return Posts
+     */
+    public function setPostscategoriespostscategory(\Homepage\BlogBundle\Entity\PostsCategories $postscategoriespostscategory = null)
+    {
+        $this->postscategoriespostscategory = $postscategoriespostscategory;
+    
+        return $this;
+    }
+
+    /**
+     * Get postscategoriespostscategory
+     *
+     * @return \Homepage\BlogBundle\Entity\PostsCategories 
+     */
+    public function getPostscategoriespostscategory()
+    {
+        return $this->postscategoriespostscategory;
+    }
+}

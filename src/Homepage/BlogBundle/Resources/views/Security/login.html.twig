@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/signin.css') }}">
+{% endblock %}
+
+{% block main %}
+
+{% if error %}
+    <div class="panel panel-default">
+        <div class="panel-heading error">Błąd</div>
+        <div class="panel-body">
+            {{ error.message }}
+        </div>
+    </div>
+{% endif %}
+
+<form class="form-signin" action="{{ path('login_check') }}" method="post">
+    <h2 class="form-signin-heading">Proszę zaloguj się</h2>
+    <input type="text" name="_username" class="form-control" placeholder="Login" required autofocus>
+    <input type="password" name="_password" class="form-control" placeholder="Password" required>
+    <label class="checkbox">
+        <input type="checkbox" name="_remember_me"> Pamiętaj mnie
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
+{% endblock %}

@@ -1,35 +1,39 @@
-Homepage\BlogBundle\Entity\PostsCategories:
+Roles:
     type: entity
-    table: PostsCategories
+    table: Roles
     fields:
-        idPostsCategory:
+        idrole:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idPostsCategory
+            column: idRole
             generator:
                 strategy: IDENTITY
-        categoryName:
+        rolename:
             type: string
             length: 45
             fixed: false
             nullable: false
-            column: categoryName
-        description:
-            type: text
-            nullable: true
-            column: Description
-        createdOn:
+            column: roleName
+        createdon:
             type: datetime
             nullable: true
             column: createdOn
-        updatedOn:
+        uptadedon:
             type: datetime
             nullable: true
-            column: updatedOn
-        isActive:
+            column: uptadedOn
+        isactive:
             type: boolean
             nullable: true
             column: isActive
+    manyToMany:
+        usersuser:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: rolesrole
+            inversedBy: null
+            joinTable: null
+            orderBy: null
     lifecycleCallbacks: {  }

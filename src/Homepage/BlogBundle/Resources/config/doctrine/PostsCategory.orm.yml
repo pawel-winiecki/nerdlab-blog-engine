@@ -1,4 +1,4 @@
-PostsCategory:
+Homepage\BlogBundle\Entity\PostsCategory:
     type: entity
     table: PostsCategories
     fields:
@@ -19,7 +19,7 @@ PostsCategory:
         description:
             type: text
             nullable: true
-            column: description
+            column: Description
         createdOn:
             type: datetime
             nullable: true
@@ -28,7 +28,7 @@ PostsCategory:
             type: datetime
             nullable: true
             column: updatedOn
-        isactive:
+        isActive:
             type: boolean
             nullable: true
             column: isActive
