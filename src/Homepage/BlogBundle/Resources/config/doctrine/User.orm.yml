@@ -1,0 +1,69 @@
+Homepage\BlogBundle\Entity\User:
+    type: entity
+    table: user
+    fields:
+        idUser:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: id_user
+            generator:
+                strategy: IDENTITY
+        login:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+        email:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+        password:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+        firstName:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+            column: first_name
+        lastName:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+            column: last_name
+        createdOn:
+            type: datetime
+            nullable: true
+            column: created_on
+        uptadedOn:
+            type: datetime
+            nullable: true
+            column: uptaded_on
+        isActive:
+            type: boolean
+            nullable: true
+            column: is_active
+    manyToMany:
+        roleRole:
+            targetEntity: Role
+            cascade: {  }
+            mappedBy: null
+            inversedBy: userUser
+            joinTable:
+                name: user_has_role
+                joinColumns:
+                    -
+                        name: user_id_user
+                        referencedColumnName: id_user
+                inverseJoinColumns:
+                    -
+                        name: role_role_id
+                        referencedColumnName: role_id
+            orderBy: null
+    lifecycleCallbacks: {  }

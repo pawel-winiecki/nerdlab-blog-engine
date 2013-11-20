@@ -5,19 +5,24 @@ namespace Homepage\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PostsCategories
+ * PostsCategory
  */
 class PostsCategory
 {
     /**
      * @var integer
      */
-    private $idPostsCategory;
+    private $postsCategoryId;
 
     /**
      * @var string
      */
     private $categoryName;
+
+    /**
+     * @var string
+     */
+    private $link;
 
     /**
      * @var string
@@ -41,13 +46,13 @@ class PostsCategory
 
 
     /**
-     * Get idPostsCategory
+     * Get postsCategoryId
      *
      * @return integer 
      */
-    public function getIdPostsCategory()
+    public function getPostsCategoryId()
     {
-        return $this->idPostsCategory;
+        return $this->postsCategoryId;
     }
 
     /**
@@ -71,6 +76,29 @@ class PostsCategory
     public function getCategoryName()
     {
         return $this->categoryName;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     * @return PostsCategory
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string 
+     */
+    public function getLink()
+    {
+        return $this->link;
     }
 
     /**

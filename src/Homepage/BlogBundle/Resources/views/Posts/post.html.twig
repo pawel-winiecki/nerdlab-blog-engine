@@ -3,6 +3,7 @@
 {% block main %}
     {% if post %}
         <h2>{{ post.getTitle() }}</h2>
+        <p>Kategoria: {{ post.getPostsCategoryPostsCategory().getCategoryName() }}</p>
         <p>{{ post.getLongContent() }}</p>
     {% else %}
             <p>Nie ma takiego wpisu!</p>

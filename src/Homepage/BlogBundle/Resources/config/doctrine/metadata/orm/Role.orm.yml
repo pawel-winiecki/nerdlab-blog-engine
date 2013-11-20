@@ -1,38 +1,38 @@
-Roles:
+Role:
     type: entity
-    table: Roles
+    table: role
     fields:
-        idrole:
+        roleId:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idRole
+            column: role_id
             generator:
                 strategy: IDENTITY
-        rolename:
+        roleName:
             type: string
             length: 45
             fixed: false
             nullable: false
-            column: roleName
-        createdon:
+            column: role_name
+        createdOn:
             type: datetime
             nullable: true
-            column: createdOn
-        uptadedon:
+            column: created_on
+        uptadedOn:
             type: datetime
             nullable: true
-            column: uptadedOn
-        isactive:
+            column: uptaded_on
+        isActive:
             type: boolean
             nullable: true
-            column: isActive
+            column: is_active
     manyToMany:
-        usersuser:
-            targetEntity: Users
+        userUser:
+            targetEntity: User
             cascade: {  }
-            mappedBy: rolesrole
+            mappedBy: roleRole
             inversedBy: null
             joinTable: null
             orderBy: null

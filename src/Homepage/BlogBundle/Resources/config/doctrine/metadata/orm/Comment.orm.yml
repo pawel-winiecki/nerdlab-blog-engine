@@ -1,13 +1,13 @@
-Comments:
+Comment:
     type: entity
-    table: Comments
+    table: comment
     fields:
-        idcomment:
+        commentId:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idComment
+            column: comment_id
             generator:
                 strategy: IDENTITY
         content:
@@ -15,35 +15,35 @@ Comments:
             length: 500
             fixed: false
             nullable: false
-        createdon:
+        createdOn:
             type: datetime
             nullable: true
-            column: createdOn
-        uptadedon:
+            column: created_on
+        uptadedOn:
             type: datetime
             nullable: true
-            column: uptadedOn
-        isactive:
+            column: uptaded_on
+        isActive:
             type: boolean
             nullable: true
-            column: isActive
+            column: is_active
     manyToOne:
-        postspost:
-            targetEntity: Posts
+        userUser:
+            targetEntity: User
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                Posts_idPost:
-                    referencedColumnName: idPost
+                user_id_user:
+                    referencedColumnName: id_user
             orphanRemoval: false
-        usersuser:
-            targetEntity: Users
+        postPost:
+            targetEntity: Post
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                Users_idUser:
-                    referencedColumnName: idUser
+                post_post_id:
+                    referencedColumnName: post_id
             orphanRemoval: false
     lifecycleCallbacks: {  }

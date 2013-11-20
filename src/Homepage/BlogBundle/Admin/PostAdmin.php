@@ -9,7 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 class PostAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->add('postsCategoriesPostsCategory', 'sonata_type_model', array('label' => 'Category'), array('edit' => 'standard', 'modal' => true))
+                ->add('postsCategoryPostsCategory', 'sonata_type_model', array('label' => 'Category'), array('edit' => 'standard', 'modal' => true))
+                ->add('userUser', 'sonata_type_model', array('label' => 'Author'), array('edit' => 'standard', 'modal' => true))
                 ->add('link', null, array('label' => 'Link'))
                 ->add('title', null, array('label' => 'Title'))
                 ->add('shortContent', null, array('label' => 'Short Content'))
@@ -24,7 +25,8 @@ class PostAdmin extends Admin {
         $listMapper
                 ->addIdentifier('title', null, array('label' => 'Title'))
                 ->add('link', null, array('label' => 'Link'))
-                ->add('postsCategoriesPostsCategory.categoryName', null, array('label' => 'Category'))
+                ->add('postsCategoryPostsCategory.link', null, array('label' => 'Category'))
+                ->add('userUser.login', null, array('label' => 'Author'))
                 ->add('createdOn', null, array('label' => 'Created on'))
                 ->add('updatedOn', null, array('label' => 'Updated on'))
                 ->add('isActive', null, array('label' => 'Active'))

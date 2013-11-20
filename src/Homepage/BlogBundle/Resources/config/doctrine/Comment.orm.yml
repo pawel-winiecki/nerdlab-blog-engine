@@ -1,55 +1,33 @@
-Homepage\BlogBundle\Entity\Post:
+Homepage\BlogBundle\Entity\Comment:
     type: entity
-    table: post
+    table: comment
     fields:
-        postId:
+        commentId:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: post_id
+            column: comment_id
             generator:
                 strategy: IDENTITY
-        link:
+        content:
             type: string
-            length: 45
+            length: 500
             fixed: false
             nullable: false
-        title:
-            type: string
-            length: 45
-            fixed: false
-            nullable: false
-        shortContent:
-            type: text
-            nullable: false
-            column: short_content
-        longContent:
-            type: text
-            nullable: false
-            column: long_content
         createdOn:
             type: datetime
             nullable: true
             column: created_on
-        updatedOn:
+        uptadedOn:
             type: datetime
             nullable: true
-            column: updated_on
+            column: uptaded_on
         isActive:
             type: boolean
             nullable: true
             column: is_active
     manyToOne:
-        postsCategoryPostsCategory:
-            targetEntity: PostsCategory
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                posts_category_posts_category_id:
-                    referencedColumnName: posts_category_id
-            orphanRemoval: false
         userUser:
             targetEntity: User
             cascade: {  }
@@ -58,5 +36,14 @@ Homepage\BlogBundle\Entity\Post:
             joinColumns:
                 user_id_user:
                     referencedColumnName: id_user
+            orphanRemoval: false
+        postPost:
+            targetEntity: Post
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                post_post_id:
+                    referencedColumnName: post_id
             orphanRemoval: false
     lifecycleCallbacks: {  }

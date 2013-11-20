@@ -1,39 +1,39 @@
-Homepage\BlogBundle\Entity\PostsCategory:
+Homepage\BlogBundle\Entity\Role:
     type: entity
-    table: posts_category
+    table: role
     fields:
-        postsCategoryId:
+        roleId:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: posts_category_id
+            column: role_id
             generator:
                 strategy: IDENTITY
-        categoryName:
+        roleName:
             type: string
             length: 45
             fixed: false
             nullable: false
-            column: category_name
-        link:
-            type: string
-            length: 45
-            fixed: false
-            nullable: false
-        description:
-            type: text
-            nullable: true
+            column: role_name
         createdOn:
             type: datetime
             nullable: true
             column: created_on
-        updatedOn:
+        uptadedOn:
             type: datetime
             nullable: true
-            column: updated_on
+            column: uptaded_on
         isActive:
             type: boolean
             nullable: true
             column: is_active
+    manyToMany:
+        userUser:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: roleRole
+            inversedBy: null
+            joinTable: null
+            orderBy: null
     lifecycleCallbacks: {  }

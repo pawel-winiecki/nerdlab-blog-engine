@@ -1,13 +1,13 @@
-Posts:
+Post:
     type: entity
-    table: Posts
+    table: post
     fields:
-        idpost:
+        postId:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idPost
+            column: post_id
             generator:
                 strategy: IDENTITY
         link:
@@ -20,43 +20,43 @@ Posts:
             length: 45
             fixed: false
             nullable: false
-        shortcontent:
+        shortContent:
             type: text
             nullable: false
-            column: shortContent
-        longcontent:
+            column: short_content
+        longContent:
             type: text
             nullable: false
-            column: longContent
-        createdon:
+            column: long_content
+        createdOn:
             type: datetime
             nullable: true
-            column: createdOn
-        updatedon:
+            column: created_on
+        updatedOn:
             type: datetime
             nullable: true
-            column: updatedOn
-        isactive:
+            column: updated_on
+        isActive:
             type: boolean
             nullable: true
-            column: isActive
+            column: is_active
     manyToOne:
-        postscategoriespostscategory:
-            targetEntity: Postscategories
+        postsCategoryPostsCategory:
+            targetEntity: PostsCategory
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                PostsCategories_idPostsCategory:
-                    referencedColumnName: idPostsCategory
+                posts_category_posts_category_id:
+                    referencedColumnName: posts_category_id
             orphanRemoval: false
-        usersuser:
-            targetEntity: Users
+        userUser:
+            targetEntity: User
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                Users_idUser:
-                    referencedColumnName: idUser
+                user_id_user:
+                    referencedColumnName: id_user
             orphanRemoval: false
     lifecycleCallbacks: {  }

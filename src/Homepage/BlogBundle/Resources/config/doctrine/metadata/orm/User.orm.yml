@@ -1,13 +1,13 @@
-Users:
+User:
     type: entity
-    table: Users
+    table: user
     fields:
-        iduser:
+        idUser:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: idUser
+            column: id_user
             generator:
                 strategy: IDENTITY
         login:
@@ -25,45 +25,45 @@ Users:
             length: 45
             fixed: false
             nullable: false
-        firstname:
+        firstName:
             type: string
             length: 45
             fixed: false
             nullable: true
-            column: firstName
-        lastname:
+            column: first_name
+        lastName:
             type: string
             length: 45
             fixed: false
             nullable: true
-            column: lastName
-        createdon:
+            column: last_name
+        createdOn:
             type: datetime
             nullable: true
-            column: createdOn
-        uptadedon:
+            column: created_on
+        uptadedOn:
             type: datetime
             nullable: true
-            column: uptadedOn
-        isactive:
+            column: uptaded_on
+        isActive:
             type: boolean
             nullable: true
-            column: isActive
+            column: is_active
     manyToMany:
-        rolesrole:
-            targetEntity: Roles
+        roleRole:
+            targetEntity: Role
             cascade: {  }
             mappedBy: null
-            inversedBy: usersuser
+            inversedBy: userUser
             joinTable:
-                name: users_has_roles
+                name: user_has_role
                 joinColumns:
                     -
-                        name: Users_idUser
-                        referencedColumnName: idUser
+                        name: user_id_user
+                        referencedColumnName: id_user
                 inverseJoinColumns:
                     -
-                        name: Roles_idRole
-                        referencedColumnName: idRole
+                        name: role_role_id
+                        referencedColumnName: role_id
             orderBy: null
     lifecycleCallbacks: {  }
