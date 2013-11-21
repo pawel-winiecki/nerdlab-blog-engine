@@ -3,11 +3,25 @@
 {% block main %}
     {% if posts %}
         {% for post in posts %}
-            <h2>{{ post.getTitle() }}</h2>
-            <p>{{ post.getShortContent() }}</p>
-            <a href="post/{{ post.getLink() }}" />czytaj więcej</a>
+<h2>{{ post.getTitle() }}</h2>
+<p>{{ post.getShortContent() }}</p>
+<a href="{{ path('homepage_blog_posts', {'link': post.getLink()}) }}" />czytaj więcej</a>
         {% endfor %}
+<div class="container pagination-container">
+    <ul class="pagination">
+                {% if hasPreviousPosts %}
+        <li>
+            <a class="pull-left" href="{{ path('homepage_blog_index_page', {'page': currentPage-1}) }}" >Poprzednie wpisy</a>
+        </li>
+                {% endif %}
+                {% if hasNextPosts %}
+        <li>
+            <a class="pull-right" href="{{ path('homepage_blog_index_page', {'page': currentPage+1}) }}" >Następne wpisy</a>
+        </li>
+                {% endif %}
+    </ul>
+</div><!--end container -->
     {% else %}
-            <p>Nie ma postów</p>
+<p>Nie ma postów</p>
     {% endif %}
 {% endblock %}

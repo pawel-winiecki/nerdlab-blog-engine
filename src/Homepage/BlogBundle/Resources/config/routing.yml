@@ -1,5 +1,8 @@
-homepage_blog_homepage:
+homepage_blog_index:
     pattern:  /
+    defaults: { _controller: HomepageBlogBundle:Default:index, page:0 }
+homepage_blog_index_page:
+    pattern:  /page/{page}.html
     defaults: { _controller: HomepageBlogBundle:Default:index }
 homepage_blog_posts:
     pattern:  /post/{link}

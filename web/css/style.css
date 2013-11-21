@@ -9,4 +9,7 @@ body {
 .navbar .btn {
     display: inline-block;
 }
+.pagination-container ul.pagination {
+    display: block;
+}
 
