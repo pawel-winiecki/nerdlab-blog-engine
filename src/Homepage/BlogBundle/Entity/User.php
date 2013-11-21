@@ -3,11 +3,12 @@
 namespace Homepage\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -303,4 +304,39 @@ class User
     {
         return $this->login;
     }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {    
+        return $this->roleRole->toArray();
+    }
+
+    public function getSalt() {
+        return null;
+    }
+
+    public function getUsername() {
+        $this->login;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize() {
+        return serialize(array(
+            $this->idUser,
+        ));
+    }
+    
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized) {
+        list (
+            $this->idUser,
+        ) = unserialize($serialized);
+    }
+
 }
