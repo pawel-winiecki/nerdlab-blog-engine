@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+<h2>{{ user.getUsername() }}</h2>
+<table>
+    <tr>
+        <td>Dołączył:</td>
+        <td>{{ user.getCreatedOn()|date("d.m.Y H:i:s") }}</td>
+    </tr>
+    <tr>
+        <td>Imię:</td>
+        <td>{{ user.getFirstName() }}</td>
+    </tr>
+    <tr>
+        <td>Nazwisko:</td>
+        <td>{{ user.getLastName() }}</td>
+    </tr>
+    {% if isUser %}
+    <tr>
+        <td>Nazwisko:</td>
+        <td>{{ user.getEmail() }}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><a class="btn btn-default" href="{{ path('homepage_blog_user_edit', {'login': user.getLogin()}) }}">Edytuj dane</a></td>
+    </tr>
+    {% endif %}
+</table>
+{% endblock %}

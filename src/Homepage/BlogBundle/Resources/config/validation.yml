@@ -1,0 +1,7 @@
+Homepage\BlogBundle\Entity\User:
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true

@@ -8,7 +8,7 @@
 <a href="{{ path('homepage_blog_posts', {'link': post.getLink()}) }}" />czytaj więcej</a>
         {% endfor %}
 <div class="container pagination-container">
-    <ul class="pagination">
+    <ul class="pager">
                 {% if hasPreviousPosts %}
         <li>
             <a class="pull-left" href="{{ path('homepage_blog_index_page', {'page': currentPage-1}) }}" >Poprzednie wpisy</a>

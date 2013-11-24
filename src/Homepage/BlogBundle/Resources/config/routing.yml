@@ -6,4 +6,10 @@ homepage_blog_index_page:
     defaults: { _controller: HomepageBlogBundle:Default:index }
 homepage_blog_posts:
     pattern:  /post/{link}
-    defaults: { _controller: HomepageBlogBundle:Posts:showPost }
+    defaults: { _controller: HomepageBlogBundle:Post:showPost }
+homepage_blog_user_edit:
+    pattern:  /user/edit/{login}
+    defaults: { _controller: HomepageBlogBundle:User:edit }
+homepage_blog_user_view:
+    pattern:  /user/view/{login}
+    defaults: { _controller: HomepageBlogBundle:User:index }

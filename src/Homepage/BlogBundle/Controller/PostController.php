@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @author Paweł Winiecki
  */
-class PostsController extends Controller {
+class PostController extends Controller {
 
     public function showPostAction($link) {
         $view = array();
         
         $view['post'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')->findOneByLink($link);
         
-        return $this->render('HomepageBlogBundle:Posts:post.html.twig', $view);
+        return $this->render('HomepageBlogBundle:Post:post.html.twig', $view);
     }
 
 }

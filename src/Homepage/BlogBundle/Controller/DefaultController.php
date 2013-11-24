@@ -2,7 +2,6 @@
 
 namespace Homepage\BlogBundle\Controller;
 
-use Homepage\BlogBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {

@@ -318,7 +318,7 @@ class User implements UserInterface, \Serializable
     }
 
     public function getUsername() {
-        $this->login;
+        return $this->login;
     }
 
     /**
