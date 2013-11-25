@@ -1,7 +1,20 @@
 Homepage\BlogBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: email
+            message: The email is already used.
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: login
+            message: The login is already used.
     properties:
         email:
             - NotBlank: ~
             - Email:
                 message: Email "{{ value }}" nie jest prawidłowy.
                 checkMX: true
+        login:
+            - NotBlank: ~
+        password:
+            - Length:
+                min: 8
+                minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."

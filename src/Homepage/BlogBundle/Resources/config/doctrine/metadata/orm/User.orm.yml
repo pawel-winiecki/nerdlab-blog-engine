@@ -22,7 +22,7 @@ User:
             nullable: false
         password:
             type: string
-            length: 45
+            length: 128
             fixed: false
             nullable: false
         firstName:

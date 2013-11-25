@@ -29,7 +29,7 @@ CREATE  TABLE IF NOT EXISTS `BlogDB`.`user` (
   `id_user` INT NOT NULL AUTO_INCREMENT ,
   `login` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
-  `password` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(128) NOT NULL ,
   `first_name` VARCHAR(45) NULL ,
   `last_name` VARCHAR(45) NULL ,
   `created_on` TIMESTAMP NULL DEFAULT NOW() ,
