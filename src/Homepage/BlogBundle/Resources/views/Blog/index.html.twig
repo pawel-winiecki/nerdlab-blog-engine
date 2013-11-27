@@ -6,6 +6,11 @@
         {{ successMessage }}
 </div>
 {% endfor %}
+{% for errorMessage in app.session.flashbag.get('error-notice') %}
+<div class="alert alert-danger">
+        {{ errorMessage }}
+</div>
+{% endfor %}
     {% if posts %}
         {% for post in posts %}
 <h2>{{ post.getTitle() }}</h2>

@@ -1,8 +1,0 @@
-{% extends '::base.html.twig' %}
-
-{% block main %}
-<h2>Witaj {{ user.login }}</h2>
-<p>Aktywacja zakończyłą się sukcesem. Możesz <a href="{{ path('login') }}">zalogować się</a>
-    na swoje konto oraz obejrzeć swój <a href="{{ path('homepage_blog_user_view',
- {'login': user.login}) }}">profil</a>.</p>
-{% endblock %}

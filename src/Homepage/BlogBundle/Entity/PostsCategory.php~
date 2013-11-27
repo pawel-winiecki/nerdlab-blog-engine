@@ -3,22 +3,31 @@
 namespace Homepage\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
- * Role
+ * PostsCategory
  */
-class Role implements RoleInterface
+class PostsCategory
 {
     /**
      * @var integer
      */
-    private $roleId;
+    private $postsCategoryId;
 
     /**
      * @var string
      */
-    private $roleName;
+    private $categoryName;
+
+    /**
+     * @var string
+     */
+    private $link;
+
+    /**
+     * @var string
+     */
+    private $description;
 
     /**
      * @var \DateTime
@@ -35,57 +44,91 @@ class Role implements RoleInterface
      */
     private $isActive;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $userUser;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->userUser = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Get roleId
+     * Get postsCategoryId
      *
      * @return integer 
      */
-    public function getRoleId()
+    public function getPostsCategoryId()
     {
-        return $this->roleId;
+        return $this->postsCategoryId;
     }
 
     /**
-     * Set roleName
+     * Set categoryName
      *
-     * @param string $roleName
-     * @return Role
+     * @param string $categoryName
+     * @return PostsCategory
      */
-    public function setRoleName($roleName)
+    public function setCategoryName($categoryName)
     {
-        $this->roleName = $roleName;
+        $this->categoryName = $categoryName;
     
         return $this;
     }
 
     /**
-     * Get roleName
+     * Get categoryName
      *
      * @return string 
      */
-    public function getRoleName()
+    public function getCategoryName()
     {
-        return $this->roleName;
+        return $this->categoryName;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     * @return PostsCategory
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string 
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return PostsCategory
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
      * Set createdOn
      *
      * @param \DateTime $createdOn
-     * @return Role
+     * @return PostsCategory
      */
     public function setCreatedOn($createdOn)
     {
@@ -108,7 +151,7 @@ class Role implements RoleInterface
      * Set updatedOn
      *
      * @param \DateTime $updatedOn
-     * @return Role
+     * @return PostsCategory
      */
     public function setUpdatedOn($updatedOn)
     {
@@ -131,7 +174,7 @@ class Role implements RoleInterface
      * Set isActive
      *
      * @param boolean $isActive
-     * @return Role
+     * @return PostsCategory
      */
     public function setIsActive($isActive)
     {
@@ -149,45 +192,14 @@ class Role implements RoleInterface
     {
         return $this->isActive;
     }
-
-    /**
-     * Add userUser
-     *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
-     * @return Role
-     */
-    public function addUserUser(\Homepage\BlogBundle\Entity\User $userUser)
-    {
-        $this->userUser[] = $userUser;
     
-        return $this;
-    }
-
     /**
-     * Remove userUser
-     *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
+     * Required by admin bundle
+     * 
+     * @return string
      */
-    public function removeUserUser(\Homepage\BlogBundle\Entity\User $userUser)
+    public function __toString()
     {
-        $this->userUser->removeElement($userUser);
+        return $this->categoryName;
     }
-
-    /**
-     * Get userUser
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUserUser()
-    {
-        return $this->userUser;
-    }
-
-    /**
-     * @see RoleInterface
-     */
-    public function getRole() {
-        return $this->roleName;
-    }
-
 }

@@ -8,18 +8,15 @@
 
 namespace Homepage\BlogBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Homepage\BlogBundle\Entity\User;
-use Homepage\BlogBundle\Form\Model\ChangePassword;
 
 /**
  * Description of UesrController
  *
  * @author Paweł Winiecki
  */
-class UserController extends Controller {
+class UserController extends DefaultController {
 
     public function indexAction($login) {
         $view = array();
@@ -32,9 +29,11 @@ class UserController extends Controller {
     }
 
     public function createAction(Request $request) {
-        $user = new User();
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            return $this->redirect($this->generateUrl('homepage_blog_index'));
+        }
 
-        $this->redirectIfLoggedIn();
+        $user = new User();
 
         $view = array();
 
@@ -89,11 +88,15 @@ class UserController extends Controller {
     }
 
     public function activateAction(Request $request) {
-        $this->redirectIfLoggedIn();
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            return $this->redirect($this->generateUrl('homepage_blog_index'));
+        }
 
         $login = $request->query->get('login');
 
-        $user = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
         if (is_null($user)) {
             throw $this->createNotFoundException();
         }
@@ -107,7 +110,6 @@ class UserController extends Controller {
             $user->setUpdatedOn(new \DateTime());
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
             $em->flush();
 
             $view = array();
@@ -128,7 +130,7 @@ class UserController extends Controller {
 
         $user = $em->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
 
-        $this->checkIsCurrentUser($user);
+        $this->DeniedIfCurrentUser($user);
 
         $view = array();
 
@@ -161,58 +163,6 @@ class UserController extends Controller {
         return $this->render('HomepageBlogBundle:User:editUser.html.twig', $view);
     }
 
-    public function changePswAction(Request $request, $login) {
-        $em = $this->getDoctrine()->getManager();
-
-        $user = $em->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
-
-        $this->checkIsCurrentUser($user);
-
-        $view = array();
-
-        $password = new ChangePassword();
-
-        $form = $this->createFormBuilder($password)
-                ->setAction($this->generateUrl('homepage_blog_user_edit_psw', array('login' => $user->getUsername())))
-                ->add('oldPassword', 'password')
-                ->add('newPassword', 'repeated', array(
-                    'type' => 'password',
-                    'invalid_message' => 'The password fields must match.',
-                    'required' => true,
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
-                ))
-                ->add('save', 'submit', array('label' => 'Zmień hasło'))
-                ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $user->setPassword(hash('sha512', $password->getNewPassword()));
-                $user->setUpdatedOn(new \DateTime());
-                $em->flush();
-
-                $this->get('session')->getFlashBag()->add(
-                        'success-notice', 'Hasło zostało zmienione'
-                );
-
-                return $this->redirect($this->generateUrl('homepage_blog_user_view', array('login' => $user->getUsername())));
-            }
-        }
-
-        $view['form'] = $form->createView();
-        $view['user'] = $user;
-
-        return $this->render('HomepageBlogBundle:User:changePsw.html.twig', $view);
-    }
-    
-    public function resetPswAction() {
-        $this->redirectIfLoggedIn();
-        
-        
-    }
-
     private function sendWelcomeEmail(User $user) {
         $view = array();
         $view['login'] = $user->getLogin();
@@ -225,22 +175,6 @@ class UserController extends Controller {
                 ->setBody(
                 $this->renderView('HomepageBlogBundle:User:welcomeEmail.txt.twig', $view));
         $this->get('mailer')->send($message);
-    }
-
-    private function getUserHash(User $user) {
-        return hash('sha512', $user->getLogin() . $user->getCreatedOn()->getTimestamp());
-    }
-
-    private function checkIsCurrentUser($user) {
-        if ($user->getUsername() != $this->getUser()->getUsername()) {
-            throw new AccessDeniedException('Nie możesz edytować danych innych użytkowników.');
-        }
-    }
-
-    private function redirectIfLoggedIn() {
-        if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
-            return $this->redirect($this->generateUrl('homepage_blog_index'));
-        }
     }
 
 }

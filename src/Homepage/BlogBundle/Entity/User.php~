@@ -50,11 +50,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @var \DateTime
      */
     private $updatedOn;
-    
-    /**
-     * @var \DateTime
-     */
-    private $passwordRequestedAt;
 
     /**
      * @var boolean
@@ -244,29 +239,6 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->updatedOn;
     }
-    
-    /**
-     * Set passwordRequestedAt
-     *
-     * @param \DateTime $passwordRequestedAt
-     * @return User
-     */
-    public function setPasswordRequestedAt($passwordRequestedAt)
-    {
-        $this->passwordRequestedAt = $passwordRequestedAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get passwordRequestedAt
-     *
-     * @return \DateTime 
-     */
-    public function getPasswordRequestedAt()
-    {
-        return $this->passwordRequestedAt;
-    }
 
     /**
      * Set isActive
@@ -383,5 +355,5 @@ class User implements AdvancedUserInterface, \Serializable
             $this->idUser,
         ) = unserialize($serialized);
     }
-    
+
 }

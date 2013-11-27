@@ -28,15 +28,6 @@ Comment:
             nullable: true
             column: is_active
     manyToOne:
-        userUser:
-            targetEntity: User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                user_id_user:
-                    referencedColumnName: id_user
-            orphanRemoval: false
         postPost:
             targetEntity: Post
             cascade: {  }
@@ -45,5 +36,14 @@ Comment:
             joinColumns:
                 post_post_id:
                     referencedColumnName: post_id
+            orphanRemoval: false
+        userUser:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id_user:
+                    referencedColumnName: id_user
             orphanRemoval: false
     lifecycleCallbacks: {  }

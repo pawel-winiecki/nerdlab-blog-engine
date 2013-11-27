@@ -45,6 +45,10 @@ Homepage\BlogBundle\Entity\User:
             type: datetime
             nullable: true
             column: updated_on
+        passwordRequestedAt:
+            type: datetime
+            nullable: true
+            column: password_requested_at
         isActive:
             type: boolean
             nullable: true

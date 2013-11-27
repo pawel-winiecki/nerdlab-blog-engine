@@ -1,24 +1,27 @@
 homepage_blog_index:
     pattern:  /
-    defaults: { _controller: HomepageBlogBundle:Default:index, page:0 }
+    defaults: { _controller: HomepageBlogBundle:Blog:index, page:0 }
 homepage_blog_index_page:
     pattern:  /page/{page}.html
-    defaults: { _controller: HomepageBlogBundle:Default:index }
+    defaults: { _controller: HomepageBlogBundle:Blog:index }
 homepage_blog_posts:
     pattern:  /post/{link}
     defaults: { _controller: HomepageBlogBundle:Post:showPost }
-homepage_blog_user_edit:
-    pattern:  /user/{login}/edit/
-    defaults: { _controller: HomepageBlogBundle:User:edit }
-homepage_blog_user_edit_psw:
+homepage_blog_psw_edit:
     pattern:  /user/{login}/edit/changepsw
-    defaults: { _controller: HomepageBlogBundle:User:changePsw }
-homepage_blog_user_reset_psw:
-    pattern:  /resetpassword
-    defaults: { _controller: HomepageBlogBundle:User:resetPsw }
+    defaults: { _controller: HomepageBlogBundle:Password:changePsw }
+homepage_blog_psw_reset:
+    pattern:  /reset-password
+    defaults: { _controller: HomepageBlogBundle:Password:resetPsw }
+homepage_blog_psw_forgotten:
+    pattern:  /forgotten-password
+    defaults: { _controller: HomepageBlogBundle:Password:forgottenPsw }
 homepage_blog_user_view:
     pattern:  /user/{login}/view/
     defaults: { _controller: HomepageBlogBundle:User:index }
+homepage_blog_user_edit:
+    pattern:  /user/{login}/edit/
+    defaults: { _controller: HomepageBlogBundle:User:edit }
 homepage_blog_user_create:
     pattern:  /register/
     defaults: { _controller: HomepageBlogBundle:User:create }

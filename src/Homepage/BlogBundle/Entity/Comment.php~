@@ -3,22 +3,21 @@
 namespace Homepage\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
- * Role
+ * Comment
  */
-class Role implements RoleInterface
+class Comment
 {
     /**
      * @var integer
      */
-    private $roleId;
+    private $commentId;
 
     /**
      * @var string
      */
-    private $roleName;
+    private $content;
 
     /**
      * @var \DateTime
@@ -36,56 +35,54 @@ class Role implements RoleInterface
     private $isActive;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \Homepage\BlogBundle\Entity\User
      */
     private $userUser;
 
     /**
-     * Constructor
+     * @var \Homepage\BlogBundle\Entity\Post
      */
-    public function __construct()
-    {
-        $this->userUser = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+    private $postPost;
+
+
     /**
-     * Get roleId
+     * Get commentId
      *
      * @return integer 
      */
-    public function getRoleId()
+    public function getCommentId()
     {
-        return $this->roleId;
+        return $this->commentId;
     }
 
     /**
-     * Set roleName
+     * Set content
      *
-     * @param string $roleName
-     * @return Role
+     * @param string $content
+     * @return Comment
      */
-    public function setRoleName($roleName)
+    public function setContent($content)
     {
-        $this->roleName = $roleName;
+        $this->content = $content;
     
         return $this;
     }
 
     /**
-     * Get roleName
+     * Get content
      *
      * @return string 
      */
-    public function getRoleName()
+    public function getContent()
     {
-        return $this->roleName;
+        return $this->content;
     }
 
     /**
      * Set createdOn
      *
      * @param \DateTime $createdOn
-     * @return Role
+     * @return Comment
      */
     public function setCreatedOn($createdOn)
     {
@@ -108,7 +105,7 @@ class Role implements RoleInterface
      * Set updatedOn
      *
      * @param \DateTime $updatedOn
-     * @return Role
+     * @return Comment
      */
     public function setUpdatedOn($updatedOn)
     {
@@ -131,7 +128,7 @@ class Role implements RoleInterface
      * Set isActive
      *
      * @param boolean $isActive
-     * @return Role
+     * @return Comment
      */
     public function setIsActive($isActive)
     {
@@ -151,32 +148,22 @@ class Role implements RoleInterface
     }
 
     /**
-     * Add userUser
+     * Set userUser
      *
      * @param \Homepage\BlogBundle\Entity\User $userUser
-     * @return Role
+     * @return Comment
      */
-    public function addUserUser(\Homepage\BlogBundle\Entity\User $userUser)
+    public function setUserUser(\Homepage\BlogBundle\Entity\User $userUser = null)
     {
-        $this->userUser[] = $userUser;
+        $this->userUser = $userUser;
     
         return $this;
     }
 
     /**
-     * Remove userUser
-     *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
-     */
-    public function removeUserUser(\Homepage\BlogBundle\Entity\User $userUser)
-    {
-        $this->userUser->removeElement($userUser);
-    }
-
-    /**
      * Get userUser
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Homepage\BlogBundle\Entity\User 
      */
     public function getUserUser()
     {
@@ -184,10 +171,25 @@ class Role implements RoleInterface
     }
 
     /**
-     * @see RoleInterface
+     * Set postPost
+     *
+     * @param \Homepage\BlogBundle\Entity\Post $postPost
+     * @return Comment
      */
-    public function getRole() {
-        return $this->roleName;
+    public function setPostPost(\Homepage\BlogBundle\Entity\Post $postPost = null)
+    {
+        $this->postPost = $postPost;
+    
+        return $this;
     }
 
+    /**
+     * Get postPost
+     *
+     * @return \Homepage\BlogBundle\Entity\Post 
+     */
+    public function getPostPost()
+    {
+        return $this->postPost;
+    }
 }
