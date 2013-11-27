@@ -1,6 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block main %}
+{% for successMessage in app.session.flashbag.get('success-notice') %}
+<div class="alert alert-success">
+        {{ successMessage }}
+</div>
+{% endfor %}
     {% if posts %}
         {% for post in posts %}
 <h2>{{ post.getTitle() }}</h2>

@@ -8,16 +8,16 @@ homepage_blog_posts:
     pattern:  /post/{link}
     defaults: { _controller: HomepageBlogBundle:Post:showPost }
 homepage_blog_user_edit:
-    pattern:  /user/edit/{login}
+    pattern:  /user/{login}/edit/
     defaults: { _controller: HomepageBlogBundle:User:edit }
 homepage_blog_user_edit_psw:
-    pattern:  /user/edit/{login}/changepsw
+    pattern:  /user/{login}/edit/changepsw
     defaults: { _controller: HomepageBlogBundle:User:changePsw }
 homepage_blog_user_reset_psw:
-    pattern:  /user/resetpassword
+    pattern:  /resetpassword
     defaults: { _controller: HomepageBlogBundle:User:resetPsw }
 homepage_blog_user_view:
-    pattern:  /user/view/{login}
+    pattern:  /user/{login}/view/
     defaults: { _controller: HomepageBlogBundle:User:index }
 homepage_blog_user_create:
     pattern:  /register/

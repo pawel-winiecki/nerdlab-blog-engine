@@ -6,19 +6,34 @@
 
 {% block main %}
 
+{% for successMessage in app.session.flashbag.get('success-notice') %}
+<div class="alert alert-success">
+        {{ successMessage }}
+</div>
+{% endfor %}
+
 {% if error %}
-    <div class="alert alert-warning">
+<div class="alert alert-warning">
         {{ error.message }}
-    </div>
+</div>
 {% endif %}
 
-<form class="form-signin" action="{{ path('login_check') }}" method="post">
-    <h2 class="form-signin-heading">Proszę zaloguj się</h2>
+<form class="form-signin panel panel-info" action="{{ path('login_check') }}" method="post">
+    <div class="panel-heading">    
+        <h2 class="panel-title text-center">Zaloguj się</h2>
+    </div>
+    <div class="panel-body">
     <input type="text" name="_username" class="form-control" placeholder="Login" required autofocus>
     <input type="password" name="_password" class="form-control" placeholder="Password" required>
     <label class="checkbox">
         <input type="checkbox" name="_remember_me"> Pamiętaj mnie
     </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
+    <p class="text-center spacer-top-10"><a class="small" href="">Nie pamiętasz hasła?</a></p>
+    </div>
 </form>
+<div class="block text-center">
+    <h3 class="text-center">Nie masz jeszcze konta?</h3>
+    <a class="btn btn-success btn-sm" href="{{ path('homepage_blog_user_create') }}">Zarejestruj się</a>
+</div>
 {% endblock %}

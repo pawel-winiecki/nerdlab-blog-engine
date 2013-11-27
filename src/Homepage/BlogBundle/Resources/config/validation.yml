@@ -15,6 +15,17 @@ Homepage\BlogBundle\Entity\User:
         login:
             - NotBlank: ~
         password:
+            - NotBlank: ~
+            - Length:
+                min: 8
+                minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
+Homepage\BlogBundle\Form\Model\ChangePassword:
+    properties:
+        oldPassword:
+            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+                message: "Wprowadziłeś złe aktualne hasło."
+        newPassword:
+            - NotBlank: ~
             - Length:
                 min: 8
                 minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."

@@ -1,19 +1,24 @@
 {% extends '::base.html.twig' %}
-
+{% form_theme form 'HomepageBlogBundle:Form:fields.html.twig' %}
 {% block main %}
-<h2>{{ user.getLogin() }}</h2>
-{{ form_start(form) }}
+{#<h2>{{ user.getLogin() }}</h2>
+<p><a href="{{ path('homepage_blog_user_edit_psw',{'login': user.login}) }}">Zmień hasło</a></p>
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
     {{ form_errors(form) }}
+<div class="control-group">
+    <span class="control-label">Dołączył:</span>
+    <div class="controls">
+        <span>{{ user.getCreatedOn()|date("d.m.Y H:i:s") }}</span>
+    </div>
+</div>
+<div class="control-group">
+    {{ form_label(form.firstName) }}
+    <div class="controls">
+        <span>{{ form_widget(form.firstName) }}</span>
+        {{ form_errors(form.firstName, {'attr': {'class': 'help-block'}}) }}
+    </div>
+</div>
 <table>
-    <tr>
-        <td>Dołączył:</td>
-        <td>{{ user.getCreatedOn()|date("d.m.Y H:i:s") }}</td>
-    </tr>
-    <tr>
-        <td>{{ form_label(form.firstName) }}</td>
-        <td>{{ form_widget(form.firstName) }}
-        {{ form_errors(form.firstName) }}</td>
-    </tr>
     <tr>
         <td>{{ form_label(form.lastName) }}</td>
         <td>{{ form_widget(form.lastName) }}
@@ -32,6 +37,10 @@
         <td></td>
         <td>{{ form_widget(form.save) }}</td>
     </tr>
-</table>
+</table> #}
+<h2>{{ user.getLogin() }}</h2>
+<p><a href="{{ path('homepage_blog_user_edit_psw',{'login': user.login}) }}">Zmień hasło</a></p>
+{{ form_start(form) }}
+<legend>Edytuj dane</legend>
 {{ form_end(form) }}
 {% endblock %}

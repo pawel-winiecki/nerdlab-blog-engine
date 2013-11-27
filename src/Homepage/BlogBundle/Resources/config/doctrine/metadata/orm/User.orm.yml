@@ -41,10 +41,10 @@ User:
             type: datetime
             nullable: true
             column: created_on
-        uptadedOn:
+        updatedOn:
             type: datetime
             nullable: true
-            column: uptaded_on
+            column: updated_on
         isActive:
             type: boolean
             nullable: true

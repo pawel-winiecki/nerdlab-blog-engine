@@ -27,7 +27,7 @@ class Comment
     /**
      * @var \DateTime
      */
-    private $uptadedOn;
+    private $updatedOn;
 
     /**
      * @var boolean
@@ -102,26 +102,26 @@ class Comment
     }
 
     /**
-     * Set uptadedOn
+     * Set updatedOn
      *
-     * @param \DateTime $uptadedOn
+     * @param \DateTime $updatedOn
      * @return Comment
      */
-    public function setUptadedOn($uptadedOn)
+    public function setUpdatedOn($updatedOn)
     {
-        $this->uptadedOn = $uptadedOn;
+        $this->updatedOn = $updatedOn;
     
         return $this;
     }
 
     /**
-     * Get uptadedOn
+     * Get updatedOn
      *
      * @return \DateTime 
      */
-    public function getUptadedOn()
+    public function getUpdatedOn()
     {
-        return $this->uptadedOn;
+        return $this->updatedOn;
     }
 
     /**
