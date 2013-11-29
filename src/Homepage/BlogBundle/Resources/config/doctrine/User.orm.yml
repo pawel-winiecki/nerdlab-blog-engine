@@ -2,12 +2,12 @@ Homepage\BlogBundle\Entity\User:
     type: entity
     table: user
     fields:
-        idUser:
+        id:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: id_user
+            column: id
             generator:
                 strategy: IDENTITY
         login:
@@ -54,20 +54,20 @@ Homepage\BlogBundle\Entity\User:
             nullable: true
             column: is_active
     manyToMany:
-        roleRole:
+        role:
             targetEntity: Role
             cascade: {  }
             mappedBy: null
-            inversedBy: userUser
+            inversedBy: user
             joinTable:
                 name: user_has_role
                 joinColumns:
                     -
-                        name: user_id_user
-                        referencedColumnName: id_user
+                        name: user_id
+                        referencedColumnName: id
                 inverseJoinColumns:
                     -
-                        name: role_role_id
-                        referencedColumnName: role_id
+                        name: role_id
+                        referencedColumnName: id
             orderBy: null
     lifecycleCallbacks: {  }

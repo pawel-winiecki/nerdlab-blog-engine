@@ -105,7 +105,7 @@ class UserController extends DefaultController {
         $key = $request->query->get('key');
 
         if ($key == $hash) {
-            $user->addRoleRole($this->getDoctrine()->getRepository('HomepageBlogBundle:Role')->findOneByRoleName('ROLE_USER'));
+            $user->addRole($this->getDoctrine()->getRepository('HomepageBlogBundle:Role')->findOneByRoleName('ROLE_USER'));
             $user->setIsActive(1);
             $user->setUpdatedOn(new \DateTime());
 
@@ -116,7 +116,7 @@ class UserController extends DefaultController {
             $view['user'] = $user;
 
             $this->get('session')->getFlashBag()->add(
-                    'pdatedOn', 'Konto zostało aktywowane. Możesz się zalogować.'
+                    'success-notice', 'Konto zostało aktywowane. Możesz się zalogować.'
             );
 
             return $this->redirect($this->generateUrl('login'));

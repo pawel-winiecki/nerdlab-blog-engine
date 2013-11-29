@@ -2,12 +2,12 @@ PostsCategory:
     type: entity
     table: posts_category
     fields:
-        postsCategoryId:
+        id:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: posts_category_id
+            column: id
             generator:
                 strategy: IDENTITY
         categoryName:

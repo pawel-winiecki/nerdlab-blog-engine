@@ -8,10 +8,14 @@ class BlogController extends Controller {
     
     private $_limit = 3;
 
-    public function indexAction($page) {
+    public function indexAction($page, $category = null) {
         $view = array();
-        
         $view['currentPage'] = $page;
+        
+        if($category) {
+            
+        }
+        
         $view['posts'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')
                 ->findBy(
                         array('isActive' => 1),
@@ -41,6 +45,17 @@ class BlogController extends Controller {
         $view['hasNextPosts'] = !empty($nextPosts);
         
         return $this->render('HomepageBlogBundle:Blog:index.html.twig', $view);
+    }
+    
+    public function categoryListAction() {
+        $view = array();
+
+        $view['postsCategories'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:PostsCategory')
+                ->findBy(
+                        array('isActive' => 1),
+                        array('categoryName' => 'ASC')
+                        );
+        return $this->render('HomepageBlogBundle:Blog:categoryList.html.twig', $view);
     }
 
 }

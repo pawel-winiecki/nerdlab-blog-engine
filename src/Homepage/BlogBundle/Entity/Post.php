@@ -12,7 +12,7 @@ class Post
     /**
      * @var integer
      */
-    private $postId;
+    private $id;
 
     /**
      * @var string
@@ -52,22 +52,22 @@ class Post
     /**
      * @var \Homepage\BlogBundle\Entity\PostsCategory
      */
-    private $postsCategoryPostsCategory;
+    private $postsCategory;
 
     /**
      * @var \Homepage\BlogBundle\Entity\User
      */
-    private $userUser;
+    private $user;
 
 
     /**
-     * Get postId
+     * Get id
      *
      * @return integer 
      */
-    public function getPostId()
+    public function getId()
     {
-        return $this->postId;
+        return $this->id;
     }
 
     /**
@@ -79,6 +79,13 @@ class Post
     public function setLink($link)
     {
         $this->link = $link;
+    
+        return $this;
+    }
+    
+    public function generateLinkFromTitle()
+    {
+        $this->link = str_replace(' ','-',strtolower(trim($this->title)));
     
         return $this;
     }
@@ -232,48 +239,48 @@ class Post
     }
 
     /**
-     * Set postsCategoryPostsCategory
+     * Set postsCategory
      *
-     * @param \Homepage\BlogBundle\Entity\PostsCategory $postsCategoryPostsCategory
+     * @param \Homepage\BlogBundle\Entity\PostsCategory $postsCategory
      * @return Post
      */
-    public function setPostsCategoryPostsCategory(\Homepage\BlogBundle\Entity\PostsCategory $postsCategoryPostsCategory = null)
+    public function setPostsCategory(\Homepage\BlogBundle\Entity\PostsCategory $postsCategory = null)
     {
-        $this->postsCategoryPostsCategory = $postsCategoryPostsCategory;
+        $this->postsCategory = $postsCategory;
     
         return $this;
     }
 
     /**
-     * Get postsCategoryPostsCategory
+     * Get postsCategory
      *
      * @return \Homepage\BlogBundle\Entity\PostsCategory 
      */
-    public function getPostsCategoryPostsCategory()
+    public function getPostsCategory()
     {
-        return $this->postsCategoryPostsCategory;
+        return $this->postsCategory;
     }
 
     /**
-     * Set userUser
+     * Set user
      *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
+     * @param \Homepage\BlogBundle\Entity\User $user
      * @return Post
      */
-    public function setUserUser(\Homepage\BlogBundle\Entity\User $userUser = null)
+    public function setUser(\Homepage\BlogBundle\Entity\User $user = null)
     {
-        $this->userUser = $userUser;
+        $this->user = $user;
     
         return $this;
     }
 
     /**
-     * Get userUser
+     * Get user
      *
      * @return \Homepage\BlogBundle\Entity\User 
      */
-    public function getUserUser()
+    public function getUser()
     {
-        return $this->userUser;
+        return $this->user;
     }
 }

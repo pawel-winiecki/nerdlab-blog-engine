@@ -12,7 +12,7 @@ class Comment
     /**
      * @var integer
      */
-    private $commentId;
+    private $id;
 
     /**
      * @var string
@@ -37,22 +37,22 @@ class Comment
     /**
      * @var \Homepage\BlogBundle\Entity\User
      */
-    private $userUser;
+    private $user;
 
     /**
      * @var \Homepage\BlogBundle\Entity\Post
      */
-    private $postPost;
+    private $post;
 
 
     /**
-     * Get commentId
+     * Get id
      *
      * @return integer 
      */
-    public function getCommentId()
+    public function getId()
     {
-        return $this->commentId;
+        return $this->id;
     }
 
     /**
@@ -148,48 +148,48 @@ class Comment
     }
 
     /**
-     * Set userUser
+     * Set user
      *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
+     * @param \Homepage\BlogBundle\Entity\User $user
      * @return Comment
      */
-    public function setUserUser(\Homepage\BlogBundle\Entity\User $userUser = null)
+    public function setUser(\Homepage\BlogBundle\Entity\User $user = null)
     {
-        $this->userUser = $userUser;
+        $this->user = $user;
     
         return $this;
     }
 
     /**
-     * Get userUser
+     * Get user
      *
      * @return \Homepage\BlogBundle\Entity\User 
      */
-    public function getUserUser()
+    public function getUser()
     {
-        return $this->userUser;
+        return $this->user;
     }
 
     /**
-     * Set postPost
+     * Set post
      *
-     * @param \Homepage\BlogBundle\Entity\Post $postPost
+     * @param \Homepage\BlogBundle\Entity\Post $post
      * @return Comment
      */
-    public function setPostPost(\Homepage\BlogBundle\Entity\Post $postPost = null)
+    public function setPost(\Homepage\BlogBundle\Entity\Post $post = null)
     {
-        $this->postPost = $postPost;
+        $this->post = $post;
     
         return $this;
     }
 
     /**
-     * Get postPost
+     * Get post
      *
      * @return \Homepage\BlogBundle\Entity\Post 
      */
-    public function getPostPost()
+    public function getPost()
     {
-        return $this->postPost;
+        return $this->post;
     }
 }

@@ -13,7 +13,7 @@ class Role implements RoleInterface
     /**
      * @var integer
      */
-    private $roleId;
+    private $id;
 
     /**
      * @var string
@@ -38,24 +38,24 @@ class Role implements RoleInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $userUser;
+    private $user;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->userUser = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
-     * Get roleId
+     * Get id
      *
      * @return integer 
      */
-    public function getRoleId()
+    public function getId()
     {
-        return $this->roleId;
+        return $this->id;
     }
 
     /**
@@ -151,42 +151,52 @@ class Role implements RoleInterface
     }
 
     /**
-     * Add userUser
+     * Add user
      *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
+     * @param \Homepage\BlogBundle\Entity\User $user
      * @return Role
      */
-    public function addUserUser(\Homepage\BlogBundle\Entity\User $userUser)
+    public function addUser(\Homepage\BlogBundle\Entity\User $user)
     {
-        $this->userUser[] = $userUser;
+        $this->user[] = $user;
     
         return $this;
     }
 
     /**
-     * Remove userUser
+     * Remove user
      *
-     * @param \Homepage\BlogBundle\Entity\User $userUser
+     * @param \Homepage\BlogBundle\Entity\User $user
      */
-    public function removeUserUser(\Homepage\BlogBundle\Entity\User $userUser)
+    public function removeUser(\Homepage\BlogBundle\Entity\User $user)
     {
-        $this->userUser->removeElement($userUser);
+        $this->user->removeElement($user);
     }
 
     /**
-     * Get userUser
+     * Get user
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getUserUser()
+    public function getUser()
     {
-        return $this->userUser;
+        return $this->user;
     }
 
     /**
      * @see RoleInterface
      */
     public function getRole() {
+        return $this->roleName;
+    }
+    
+    /**
+     * Required by admin bundle
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
         return $this->roleName;
     }
 

@@ -1,20 +1,27 @@
 <?php
- 
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 namespace Homepage\BlogBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class PostAdmin extends Admin {
+/**
+ * Description of RoleAdmin
+ *
+ * @author Paweł Winiecki
+ */
+class RoleAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
-                ->add('postsCategory', 'sonata_type_model', array('label' => 'Category'), array('edit' => 'standard', 'modal' => true))
-                ->add('user', 'sonata_type_model', array('label' => 'Author'), array('edit' => 'standard', 'modal' => true))
-                ->add('link', null, array('label' => 'Link'))
-                ->add('title', null, array('label' => 'Title'))
-                ->add('shortContent', null, array('label' => 'Short Content'))
-                ->add('longContent', null, array('label' => 'Long Content'))
+                ->add('roleName', null, array('label' => 'Role Name'))
+                ->add('user', 'sonata_type_model', array('expanded' => true, 'by_reference' => false, 'multiple' => true))
                 ->add('createdOn', null, array('label' => 'Created on', 'required' => false))
                 ->add('updatedOn', null, array('label' => 'Updated on', 'required' => false))
                 ->add('isActive', null, array('label' => 'Active', 'required' => false))
@@ -23,10 +30,7 @@ class PostAdmin extends Admin {
 
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-                ->addIdentifier('title', null, array('label' => 'Title'))
-                ->add('link', null, array('label' => 'Link'))
-                ->add('postsCategory.link', null, array('label' => 'Category'))
-                ->add('user.login', null, array('label' => 'Author'))
+                ->addIdentifier('roleName', null, array('label' => 'Role name'))
                 ->add('createdOn', null, array('label' => 'Created on'))
                 ->add('updatedOn', null, array('label' => 'Updated on'))
                 ->add('isActive', null, array('label' => 'Active'))
@@ -40,4 +44,3 @@ class PostAdmin extends Admin {
         ;
     }
 }
-

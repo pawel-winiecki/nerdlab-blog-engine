@@ -14,11 +14,24 @@ Homepage\BlogBundle\Entity\User:
                 checkMX: true
         login:
             - NotBlank: ~
+            - Regex: ^[a-z0-9_\-.]^
         password:
             - NotBlank: ~
             - Length:
                 min: 8
                 minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
+                
+Homepage\BlogBundle\Entity\Post:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: title
+            message: The title is already used.
+    properties:
+        title:
+            - NotBlank: ~
+            - Length:
+                min: 8
+                minMessage: "Tytuł nie może być krótszy niż {{ limit }} znaków."
                 
 Homepage\BlogBundle\Form\Model\ChangePassword:
     properties:

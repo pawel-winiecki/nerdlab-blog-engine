@@ -14,10 +14,10 @@
     {% if posts %}
         {% for post in posts %}
 <h2>{{ post.getTitle() }}</h2>
-<p>{{ post.getShortContent() }}</p>
-<a href="{{ path('homepage_blog_posts', {'link': post.getLink()}) }}" />czytaj więcej</a>
+<p>{{ post.getShortContent()|raw }}</p>
+<a href="{{ path('homepage_blog_post', {'link': post.getLink()}) }}" />czytaj więcej</a>
         {% endfor %}
-<div class="container pagination-container">
+<div class="pagination-container">
     <ul class="pager">
                 {% if hasPreviousPosts %}
         <li>

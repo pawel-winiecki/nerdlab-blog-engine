@@ -12,7 +12,7 @@ class PostsCategory
     /**
      * @var integer
      */
-    private $postsCategoryId;
+    private $id;
 
     /**
      * @var string
@@ -46,13 +46,13 @@ class PostsCategory
 
 
     /**
-     * Get postsCategoryId
+     * Get id
      *
      * @return integer 
      */
-    public function getPostsCategoryId()
+    public function getId()
     {
-        return $this->postsCategoryId;
+        return $this->id;
     }
 
     /**

@@ -4,9 +4,17 @@ homepage_blog_index:
 homepage_blog_index_page:
     pattern:  /page/{page}.html
     defaults: { _controller: HomepageBlogBundle:Blog:index }
-homepage_blog_posts:
-    pattern:  /post/{link}
+
+homepage_blog_post_create:
+    pattern:  /post/create
+    defaults: { _controller: HomepageBlogBundle:Post:createPost }
+homepage_blog_post:
+    pattern:  /post/{link}.html
     defaults: { _controller: HomepageBlogBundle:Post:showPost }
+homepage_blog_post_edit:
+    pattern:  /post/{link}/edit
+    defaults: { _controller: HomepageBlogBundle:Post:editPost }
+    
 homepage_blog_psw_edit:
     pattern:  /user/{login}/edit/changepsw
     defaults: { _controller: HomepageBlogBundle:Password:changePsw }
@@ -16,6 +24,7 @@ homepage_blog_psw_reset:
 homepage_blog_psw_forgotten:
     pattern:  /forgotten-password
     defaults: { _controller: HomepageBlogBundle:Password:forgottenPsw }
+    
 homepage_blog_user_view:
     pattern:  /user/{login}/view/
     defaults: { _controller: HomepageBlogBundle:User:index }

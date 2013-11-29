@@ -16,9 +16,13 @@ body {
 .spacer-top-10 {
     margin-top: 10px;
 }
+.spacer-bottom-10 {
+    margin-bottom: 10px;
+}
 
-ul.help-block {
+ul.help-block, ul.latest-posts, ul.latest-comments {
     list-style-type: none;
+    padding-left: 0px;
 }
 
 .form-horizontal .alert {

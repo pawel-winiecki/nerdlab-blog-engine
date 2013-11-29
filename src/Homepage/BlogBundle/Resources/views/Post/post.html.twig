@@ -1,11 +1,48 @@
 {% extends '::base.html.twig' %}
+{% form_theme form 'HomepageBlogBundle:Form:fields.html.twig' %}
+
+{% block title %}{% if post %}{{ post.getTitle() }}{% endif %}{% endblock %}
 
 {% block main %}
+{% for successMessage in app.session.flashbag.get('success-notice') %}
+<div class="alert alert-success">
+        {{ successMessage }}
+</div>
+{% endfor %}
+{% for errorMessage in app.session.flashbag.get('error-notice') %}
+<div class="alert alert-danger">
+        {{ errorMessage }}
+</div>
+{% endfor %}
     {% if post %}
-        <h2>{{ post.getTitle() }}</h2>
-        <p>Kategoria: {{ post.getPostsCategoryPostsCategory().getCategoryName() }}</p>
-        <p>{{ post.getLongContent() }}</p>
+<article>
+    <h2>{{ post.getTitle() }}</h2>
+    {% if is_granted('ROLE_AUTHOR') %}
+        <a href="{{ url('homepage_blog_post_edit',{'link' : post.getLink()}) }}" class="btn btn-default spacer-bottom-10">Edytuj</a>
+     {% endif %}
+    <div class="row">
+        <div class="col-lg-4 col-md-4"><strong>Kategoria:</strong> {{ post.getPostsCategoryPostsCategory().getCategoryName() }}</div>
+        <div class="col-lg-4 col-md-4"><strong>Autor:</strong> <a href="{{ url('homepage_blog_user_view',{'login' : post.getUserUser().getLogin()}) }}" >{{ post.getUserUser().getLogin() }}</a></div>
+        <div class="col-lg-4 col-md-4"><strong>Data:</strong> {{ post.getCreatedOn()|date("d.m.Y") }}</div>
+    </div>
+    {{ post.getLongContent()|raw }}
+</article>
+<hr />
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_end(form) }}
+{% else %}
+<p><a href="{{ url('login') }}">Zaloguj się</a> aby móc dodawać komentarze.</p>
+{% endif %}
+<hr />
+        {% if comments %}
+            {% for comment in comments %}
+<p><a href='{{ url('homepage_blog_user_view', {'login' : comment.getUserUser().getLogin()}) }}'>{{ comment.getUserUser().getLogin() }}</a></p>
+<p>{{ comment.getContent() }}</p>
+            {% endfor %}
+        {% endif %}
     {% else %}
-            <p>Nie ma takiego wpisu!</p>
+<p>Nie ma takiego wpisu!</p>
     {% endif %}
 {% endblock %}

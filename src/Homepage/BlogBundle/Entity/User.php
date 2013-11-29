@@ -14,7 +14,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var integer
      */
-    private $idUser;
+    private $id;
 
     /**
      * @var string
@@ -64,24 +64,24 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $roleRole;
+    private $role;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->roleRole = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->role = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
-     * Get idUser
+     * Get id
      *
      * @return integer 
      */
-    public function getIdUser()
+    public function getId()
     {
-        return $this->idUser;
+        return $this->id;
     }
 
     /**
@@ -292,46 +292,36 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Add roleRole
+     * Add role
      *
-     * @param \Homepage\BlogBundle\Entity\Role $roleRole
+     * @param \Homepage\BlogBundle\Entity\Role $role
      * @return User
      */
-    public function addRoleRole(\Homepage\BlogBundle\Entity\Role $roleRole)
+    public function addRole(\Homepage\BlogBundle\Entity\Role $role)
     {
-        $this->roleRole[] = $roleRole;
+        $this->role[] = $role;
     
         return $this;
     }
 
     /**
-     * Remove roleRole
+     * Remove role
      *
-     * @param \Homepage\BlogBundle\Entity\Role $roleRole
+     * @param \Homepage\BlogBundle\Entity\Role $role
      */
-    public function removeRoleRole(\Homepage\BlogBundle\Entity\Role $roleRole)
+    public function removeRole(\Homepage\BlogBundle\Entity\Role $role)
     {
-        $this->roleRole->removeElement($roleRole);
+        $this->role->removeElement($role);
     }
 
     /**
-     * Get roleRole
+     * Get role
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRoleRole()
+    public function getRole()
     {
-        return $this->roleRole;
-    }
-    
-    /**
-     * Required by admin bundle
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->login;
+        return $this->role;
     }
 
     public function eraseCredentials() {
@@ -339,7 +329,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     public function getRoles() {    
-        return $this->roleRole->toArray();
+        return $this->role->toArray();
     }
 
     public function getSalt() {
@@ -371,7 +361,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function serialize() {
         return serialize(array(
-            $this->idUser,
+            $this->id,
         ));
     }
     
@@ -380,8 +370,18 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function unserialize($serialized) {
         list (
-            $this->idUser,
+            $this->id,
         ) = unserialize($serialized);
+    }
+    
+    /**
+     * Required by admin bundle
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->login;
     }
     
 }

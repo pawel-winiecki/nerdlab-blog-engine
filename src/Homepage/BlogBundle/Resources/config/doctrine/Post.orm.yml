@@ -2,12 +2,12 @@ Homepage\BlogBundle\Entity\Post:
     type: entity
     table: post
     fields:
-        postId:
+        id:
             id: true
             type: integer
             unsigned: false
             nullable: false
-            column: post_id
+            column: id
             generator:
                 strategy: IDENTITY
         link:
@@ -41,22 +41,22 @@ Homepage\BlogBundle\Entity\Post:
             nullable: true
             column: is_active
     manyToOne:
-        postsCategoryPostsCategory:
+        postsCategory:
             targetEntity: PostsCategory
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                posts_category_posts_category_id:
-                    referencedColumnName: posts_category_id
+                posts_category_id:
+                    referencedColumnName: id
             orphanRemoval: false
-        userUser:
+        user:
             targetEntity: User
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                user_id_user:
-                    referencedColumnName: id_user
+                user_id:
+                    referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }
