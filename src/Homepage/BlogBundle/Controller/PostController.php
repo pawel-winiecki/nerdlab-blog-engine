@@ -32,6 +32,7 @@ class PostController extends Controller {
         $form->handleRequest($request);
 
         if ($this->get('security.context')->isGranted('ROLE_USER') && $form->isSubmitted() && $form->isValid()) {
+            $comment->setContent(nl2br(strip_tags($comment->getContent())));
             $comment->setPost($post);
             $comment->setUser($this->getUser());
             $comment->setIsActive(1);
@@ -49,7 +50,7 @@ class PostController extends Controller {
         $view = array();
         $view['comments'] = $this->getDoctrine()
                 ->getRepository('HomepageBlogBundle:Comment')
-                ->findBy(array('postPost' => $post, 'isActive' => 1));
+                ->findBy(array('post' => $post, 'isActive' => 1));
         $view['form'] = $form->createView();
         $view['post'] = $post;
 
@@ -125,7 +126,7 @@ class PostController extends Controller {
                 array('isActive' => 1), array('createdOn' => 'DESC'), $max
         );
 
-        return $this->render('HomepageBlogBundle:Post:latestPosts.html.twig', $view);
+        return $this->render('HomepageBlogBundle:Post:_latestPosts.html.twig', $view);
     }
 
     function latestCommentsAction($max) {
@@ -136,23 +137,24 @@ class PostController extends Controller {
                 array('isActive' => 1), array('createdOn' => 'DESC'), $max
         );
 
-        return $this->render('HomepageBlogBundle:Post:latestComments.html.twig', $view);
+        return $this->render('HomepageBlogBundle:Post:_latestComments.html.twig', $view);
     }
 
     private function createPostForm(Post $post, $actionUrl, $label) {
         return $this->createFormBuilder($post)
                         ->setAction($actionUrl)
-                        ->add('title', 'text')
-                        ->add('isActive', 'checkbox')
-                        ->add('postsCategoryPostsCategory', 'entity', array(
+                        ->add('title', 'text', array('label' => 'Tytuł'))
+                        ->add('isActive', 'checkbox', array('label' => 'Opublikowany'))
+                        ->add('postsCategory', 'entity', array(
+                            'label' => 'Kategoria',
                             'class' => 'HomepageBlogBundle:PostsCategory',
                             'query_builder' => function(EntityRepository $er) {
                         return $er->createQueryBuilder('g')
                                 ->orderBy('g.categoryName', 'ASC')
                                 ->where('g.isActive = 1');
                     },))
-                        ->add('shortContent', 'textarea')
-                        ->add('longContent', 'textarea')
+                        ->add('shortContent', 'textarea', array('label' => 'Krótka treść'))
+                        ->add('longContent', 'textarea', array('label' => 'Pełna treść'))
                         ->add('save', 'submit', array('label' => $label))
                         ->getForm();
     }
@@ -160,7 +162,7 @@ class PostController extends Controller {
     private function createCommentForm(Comment $comment, $link) {
         return $this->createFormBuilder($comment)
                         ->setAction($this->generateUrl('homepage_blog_post', array('link' => $link)))
-                        ->add('content', 'textarea')
+                        ->add('content', 'textarea', array('attr' => array('placeholder'=>'Skomentuj...','title'=>'Skomentuj...')))
                         ->add('save', 'submit', array('label' => 'Dodaj komentarz'))
                         ->getForm();
     }

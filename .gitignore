@@ -1,7 +1,10 @@
-nbproject/*
-app/logs/*
-app/cache/*
-nbproject/private/
-/PhpProject1/nbproject/private/
-/PhpProject1/vendor/
+/nbproject/*
+/nbproject/private/
+/web/bundles/
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
 /vendor/
+/app/config/parameters.yml
+/SpringBlog/nbproject/private/
+/SpringBlog/build/

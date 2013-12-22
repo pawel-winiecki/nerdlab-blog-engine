@@ -48,3 +48,9 @@ and open the template in the editor.
 .form-signin .form-signin-heading .error {
     color: red;
 }
+.form-signin p {
+  margin-top: 20px;
+}
+.btn-register {
+    margin-top: 20px;
+}

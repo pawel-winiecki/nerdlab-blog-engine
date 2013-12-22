@@ -2,10 +2,10 @@ Homepage\BlogBundle\Entity\User:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: email
-            message: The email is already used.
+            message: Na ten email zarejestrowano już konto.
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: login
-            message: The login is already used.
+            message: Istnieje konto o takiej nazwie.
     properties:
         email:
             - NotBlank: ~
@@ -14,8 +14,13 @@ Homepage\BlogBundle\Entity\User:
                 checkMX: true
         login:
             - NotBlank: ~
-            - Regex: ^[a-z0-9_\-.]^
-        password:
+            - Regex: 
+                pattern: "/^[A-Za-z][A-Za-z0-9\._\-]*$/"
+                message: "Możesz używać litery, cyfry, kropki, podkreślniki i myślniki."
+            - Length:
+                min: 8
+                minMessage: "Login nie może być krótsze niż {{ limit }} znaków."
+        plainPassword:
             - NotBlank: ~
             - Length:
                 min: 8
@@ -25,7 +30,7 @@ Homepage\BlogBundle\Entity\Post:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: title
-            message: The title is already used.
+            message: Istnieje post o takim tytule.
     properties:
         title:
             - NotBlank: ~

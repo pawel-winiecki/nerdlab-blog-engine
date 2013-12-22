@@ -11,6 +11,8 @@ namespace Homepage\BlogBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Homepage\BlogBundle\Entity\User;
 
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+
 /**
  * Description of UesrController
  *
@@ -23,7 +25,12 @@ class UserController extends DefaultController {
 
         $view['user'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
 
-        $view['isUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
+        $view['isClientUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
+        
+        //$view['isAuthor'] = $view['user']->hasRole('ROLE_AUTHOR');
+        
+        $view['comments'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Comment')->findByUser($view['user'],null,array('createdOn' => 'ASC'));
+        $view['posts'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')->findByUser($view['user']);
 
         return $this->render('HomepageBlogBundle:User:viewUser.html.twig', $view);
     }
@@ -40,31 +47,30 @@ class UserController extends DefaultController {
         $form = $this->createFormBuilder($user)
                 ->setAction($this->generateUrl('homepage_blog_user_create'))
                 ->add('login', 'text')
-                ->add('firstName', 'text', array('required' => false))
-                ->add('lastName', 'text', array('required' => false))
-                ->add('password', 'password')
-                ->add('password', 'repeated', array(
+                ->add('firstName', 'text', array('required' => false, 'label' => 'Imię'))
+                ->add('lastName', 'text', array('required' => false, 'label' => 'Nazwisko'))
+                ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
-                    'invalid_message' => 'The password fields must match.',
+                    'invalid_message' => 'Hasło musi być takie samo.',
                     'required' => true,
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
+                    'first_options' => array('label' => 'Hasło'),
+                    'second_options' => array('label' => 'Powtórz hasło'),
                 ))
                 ->add('email', 'repeated', array(
                     'type' => 'email',
-                    'invalid_message' => 'The email fields must match.',
+                    'invalid_message' => 'Email musi być taki sam.',
                     'required' => true,
                     'first_options' => array('label' => 'Email'),
-                    'second_options' => array('label' => 'Repeat Email'),
+                    'second_options' => array('label' => 'Powtórz Email'),
                 ))
-                ->add('save', 'submit')
+                ->add('save', 'submit',array('label' => 'Zarejestruj się'))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setCreatedOn(new \DateTime());
-            $user->setPassword(hash('sha512', $user->getPassword()));
+            $user->setPassword(hash('sha512', $user->getPlainPassword()));
             $user->setIsActive(0);
 
             $em = $this->getDoctrine()->getManager();
@@ -136,10 +142,10 @@ class UserController extends DefaultController {
 
         $form = $this->createFormBuilder($user)
                 ->setAction($this->generateUrl('homepage_blog_user_edit', array('login' => $user->getUsername())))
-                ->add('firstName', 'text', array('required' => false))
-                ->add('lastName', 'text', array('required' => false))
-                ->add('email', 'email')
-                ->add('save', 'submit')
+                ->add('firstName', 'text', array('required' => false, 'label' => 'Imię'))
+                ->add('lastName', 'text', array('required' => false, 'label' => 'Nazwisko'))
+                ->add('email', 'email', array('label' => 'Email'))
+                ->add('save', 'submit', array('label' => 'Zapisz'))
                 ->getForm();
 
         $form->handleRequest($request);
@@ -176,5 +182,5 @@ class UserController extends DefaultController {
                 $this->renderView('HomepageBlogBundle:User:welcomeEmail.txt.twig', $view));
         $this->get('mailer')->send($message);
     }
-
+    
 }

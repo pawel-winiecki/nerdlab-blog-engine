@@ -27,11 +27,11 @@ id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% end
 
 {% block form_row %}
 {% spaceless %}
-<div class="form-group">
-    <div class="col-lg-3 col-md-3">
+<div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+    <div class="col-sm-3">
             {{ form_label(form) }}
     </div>
-    <div class="controls col-lg-9 col-md-9">
+    <div class="controls col-sm-9">
         {{ form_widget(form) }}
         {{ form_errors(form) }}
     </div>
@@ -42,7 +42,7 @@ id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% end
 {% block button_row %}
 {% spaceless %}
 <div class="form-group">
-    <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3">
+    <div class="col-sm-9 col-sm-offset-3">
         {{ form_widget(form) }}
     </div>
 </div>
@@ -60,7 +60,7 @@ id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% end
 {% block form_errors %}
 {% spaceless %}
     {% if errors|length > 0 %}
-    <ul class="alert alert-danger help-block">
+    <ul class="help-block">
         {% for error in errors %}
             <li>{{ error.message }}</li>
         {% endfor %}

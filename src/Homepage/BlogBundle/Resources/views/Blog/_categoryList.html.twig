@@ -1,0 +1,4 @@
+{# empty Twig template #}
+{% for postsCategory in postsCategories %}
+            <li><a href="{{ url('homepage_blog_category',{'category' : postsCategory.link}) }}">{{ postsCategory.categoryName }}</a></li>
+{% endfor %}

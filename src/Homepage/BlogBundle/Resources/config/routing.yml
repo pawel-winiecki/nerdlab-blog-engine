@@ -4,6 +4,12 @@ homepage_blog_index:
 homepage_blog_index_page:
     pattern:  /page/{page}.html
     defaults: { _controller: HomepageBlogBundle:Blog:index }
+homepage_blog_category:
+    pattern:  /category/{category}/
+    defaults: { _controller: HomepageBlogBundle:Blog:index, page:0 }
+homepage_blog_category_page:
+    pattern:  /category/{category}/page/{page}.html
+    defaults: { _controller: HomepageBlogBundle:Blog:index }
 
 homepage_blog_post_create:
     pattern:  /post/create
@@ -37,3 +43,14 @@ homepage_blog_user_create:
 homepage_blog_user_activate:
     pattern:  /activate/
     defaults: { _controller: HomepageBlogBundle:User:activate }
+    
+homepage_blog_privacy:
+    path: /polityka-prywatnosci.html
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'HomepageBlogBundle:Static:privacy.html.twig'
+homepage_blog_cookies:
+    path: /polityka-cookies.html
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'HomepageBlogBundle:Static:cookies.html.twig'

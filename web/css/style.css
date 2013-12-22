@@ -2,30 +2,115 @@
     Created on : 2013-11-15, 14:57:04
     Author     : Paweł Winiecki
 */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+.pager .next a:after {
+    content: "\0000A0\00BB";
 }
-.navbar .btn {
+
+.pager .previous a:before {
+    content: "\00AB\0000A0";
+}
+
+html, body {
+    height: 100%
+        /*padding-top: 60px;
+        padding-bottom: 60px;*/
+}
+/*.navbar .btn {
     display: inline-block;
-}
-.pagination-container ul.pagination {
-    display: block;
-}
-
-.spacer-top-10 {
-    margin-top: 10px;
-}
-.spacer-bottom-10 {
-    margin-bottom: 10px;
-}
-
-ul.help-block, ul.latest-posts, ul.latest-comments {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}*/
+ul.help-block, ul.latest-posts, ul.latest-comments, ul.comments, ul.posts {
     list-style-type: none;
     padding-left: 0px;
+}
+
+li.comment, li.post {
+    margin-top: 10px 0;
+    border-bottom: 1px dotted #ddd;
 }
 
 .form-horizontal .alert {
     margin-bottom: 0px;
 }
 
+.form-horizontal .alert {
+    margin-bottom: 0px;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -60px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
+}
+
+#main-wrap > div:first-child, #main-wrap > form:first-child, #sidebar > div:first-child {
+    margin-top: 20px;
+}
+
+footer, #footer {
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+footer p {
+    margin: 20px 0px;
+}
+
+#wrap > .container {
+    padding: 60px 15px 20px;
+}
+
+div.post .post-meta {
+    margin-bottom: 10px;
+}
+
+article.post p, div.post p {
+    text-align: justify;
+}
+
+article.post .lead {
+    font-size: 18px;
+    font-weight:bold;
+}
+
+.post-meta time, .comment time {
+    color: gray;
+}
+
+.post-meta .author, .comment .author {
+    font-weight: bold;
+}
+
+.post-meta time:before, .comment p:first-child time:before {
+    content: "| ";
+}
+
+.comment p:first-child {
+    margin-top: 10px;
+}
+
+.navbar-brand .nerd-logo {
+    height: 25px;
+    width: 25px;
+    background-image: url('../img/logo.png');
+    display: inline-block;
+    margin-top:-4px;
+    margin-bottom: -5px;
+
+}
+
+.navbar-brand:hover .nerd-logo {
+    background-image: url('../img/logo-white.png');
+}
+
+#user-data .row {
+    margin-bottom: 15px;
+}
+
+#user-data .col-xs-3 {
+    font-weight: bold;
+}

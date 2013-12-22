@@ -32,13 +32,13 @@ class PasswordController extends DefaultController {
 
         $form = $this->createFormBuilder($password)
                 ->setAction($this->generateUrl('homepage_blog_psw_edit', array('login' => $user->getUsername())))
-                ->add('oldPassword', 'password')
+                ->add('oldPassword', 'password',array('label' => 'Stare hasło'))
                 ->add('newPassword', 'repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'The password fields must match.',
                     'required' => true,
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
+                    'first_options' => array('label' => 'Nowe hasło'),
+                    'second_options' => array('label' => 'Powtórz nowe hasło'),
                 ))
                 ->add('save', 'submit', array('label' => 'Zmień hasło'))
                 ->getForm();
@@ -143,12 +143,12 @@ class PasswordController extends DefaultController {
 
             $form = $this->createFormBuilder($user)
                     ->setAction($this->generateUrl('homepage_blog_psw_reset', array('login' => $user->getUsername(), 'key' => $key)))
-                    ->add('password', 'repeated', array(
+                    ->add('plainPassword', 'repeated', array(
                         'type' => 'password',
-                        'invalid_message' => 'The password fields must match.',
+                        'invalid_message' => 'Hasło musi być takie same',
                         'required' => true,
-                        'first_options' => array('label' => 'Password'),
-                        'second_options' => array('label' => 'Repeat Password'),
+                        'first_options' => array('label' => 'Hasło'),
+                        'second_options' => array('label' => 'Powtórz hasło'),
                     ))
                     ->add('save', 'submit', array('label' => 'Zmień hasło'))
                     ->getForm();
@@ -156,7 +156,7 @@ class PasswordController extends DefaultController {
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $user->setPassword(hash('sha512', $user->getPassword()));
+                $user->setPassword(hash('sha512', $user->getPlainPassword()));
                 $user->setUpdatedOn(new \DateTime());
                 $em->flush();
 

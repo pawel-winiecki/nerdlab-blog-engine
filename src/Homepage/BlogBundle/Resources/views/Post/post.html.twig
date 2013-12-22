@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
-{% form_theme form 'HomepageBlogBundle:Form:fields.html.twig' %}
+{% form_theme form 'HomepageBlogBundle:Form:comment-fields.html.twig' %}
 
 {% block title %}{% if post %}{{ post.getTitle() }}{% endif %}{% endblock %}
 
@@ -15,16 +15,17 @@
 </div>
 {% endfor %}
     {% if post %}
-<article>
-    <h2>{{ post.getTitle() }}</h2>
+<article class="post">
     {% if is_granted('ROLE_AUTHOR') %}
-        <a href="{{ url('homepage_blog_post_edit',{'link' : post.getLink()}) }}" class="btn btn-default spacer-bottom-10">Edytuj</a>
+    <a href="{{ url('homepage_blog_post_edit',{'link' : post.getLink()}) }}" class="btn btn-default pull-right">Edytuj</a>
      {% endif %}
-    <div class="row">
-        <div class="col-lg-4 col-md-4"><strong>Kategoria:</strong> {{ post.getPostsCategoryPostsCategory().getCategoryName() }}</div>
-        <div class="col-lg-4 col-md-4"><strong>Autor:</strong> <a href="{{ url('homepage_blog_user_view',{'login' : post.getUserUser().getLogin()}) }}" >{{ post.getUserUser().getLogin() }}</a></div>
-        <div class="col-lg-4 col-md-4"><strong>Data:</strong> {{ post.getCreatedOn()|date("d.m.Y") }}</div>
+    <h1>{{ post.getTitle() }}</h1>
+    <div class="row post-meta">
+        <div class="col-lg-6 col-md-6 col-sm-6 small"><a href="{{ url('homepage_blog_category',{'category' : post.getPostsCategory().getLink()}) }}">{{ post.getPostsCategory().getCategoryName() }}</a></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 small text-right"><a class="author" href="{{ url('homepage_blog_user_view',{'login' : post.getUser().getLogin()}) }}" >{{ post.getUser().getLogin() }}</a> <time>{{ post.getCreatedOn()|localizeddate('medium', 'none', global_locale ) }}</time></div>
     </div>
+    <hr />
+    <p class="lead">{{ post.getShortContent() }}</p>
     {{ post.getLongContent()|raw }}
 </article>
 <hr />
@@ -35,12 +36,17 @@
 {% else %}
 <p><a href="{{ url('login') }}">Zaloguj się</a> aby móc dodawać komentarze.</p>
 {% endif %}
-<hr />
+
         {% if comments %}
+<hr />
+<ul class="comments">
             {% for comment in comments %}
-<p><a href='{{ url('homepage_blog_user_view', {'login' : comment.getUserUser().getLogin()}) }}'>{{ comment.getUserUser().getLogin() }}</a></p>
-<p>{{ comment.getContent() }}</p>
+    <li class="comment" id="comment-{{ comment.getId() }}" >
+        <p><a class="author" href='{{ url('homepage_blog_user_view', {'login' : comment.getUser().getLogin()}) }}'>{{ comment.getUser().getLogin() }}</a> <time>{{ comment.getCreatedOn()|localizeddate('medium', 'short', global_locale) }}</time></p>
+        <p>{{ comment.getContent()|raw }}</p>
             {% endfor %}
+    </li>
+</ul>
         {% endif %}
     {% else %}
 <p>Nie ma takiego wpisu!</p>

@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  */
-class Post
-{
+class Post {
+
     /**
      * @var integer
      */
@@ -59,14 +59,12 @@ class Post
      */
     private $user;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -76,18 +74,32 @@ class Post
      * @param string $link
      * @return Post
      */
-    public function setLink($link)
-    {
+    public function setLink($link) {
         $this->link = $link;
-    
+
         return $this;
     }
-    
-    public function generateLinkFromTitle()
-    {
-        $this->link = str_replace(' ','-',strtolower(trim($this->title)));
-    
-        return $this;
+
+    public function generateLinkFromTitle() {
+        //remowe whitspace atd begin and end of string
+        $link = trim($this->title);
+        
+        //change big letters to small
+        $link = strtolower($link);
+        
+        //replace spaces with ndash
+        $link = str_replace(' ', '-', $link);
+        
+        //remove more than one ndash in line
+        $link = preg_replace('/[\-]+/', '-', $link);
+        
+        //convert diactric letters to ASCII letters
+        $link = iconv("utf-8", "ascii//TRANSLIT", $link);
+        
+        //remove special characters
+        $link = preg_replace('/[^a-z0-9\-]/', '', $link);
+
+        $this->link = $link;
     }
 
     /**
@@ -95,8 +107,7 @@ class Post
      *
      * @return string 
      */
-    public function getLink()
-    {
+    public function getLink() {
         return $this->link;
     }
 
@@ -106,10 +117,9 @@ class Post
      * @param string $title
      * @return Post
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -118,8 +128,7 @@ class Post
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -129,10 +138,9 @@ class Post
      * @param string $shortContent
      * @return Post
      */
-    public function setShortContent($shortContent)
-    {
+    public function setShortContent($shortContent) {
         $this->shortContent = $shortContent;
-    
+
         return $this;
     }
 
@@ -141,8 +149,7 @@ class Post
      *
      * @return string 
      */
-    public function getShortContent()
-    {
+    public function getShortContent() {
         return $this->shortContent;
     }
 
@@ -152,10 +159,9 @@ class Post
      * @param string $longContent
      * @return Post
      */
-    public function setLongContent($longContent)
-    {
+    public function setLongContent($longContent) {
         $this->longContent = $longContent;
-    
+
         return $this;
     }
 
@@ -164,8 +170,7 @@ class Post
      *
      * @return string 
      */
-    public function getLongContent()
-    {
+    public function getLongContent() {
         return $this->longContent;
     }
 
@@ -175,10 +180,9 @@ class Post
      * @param \DateTime $createdOn
      * @return Post
      */
-    public function setCreatedOn($createdOn)
-    {
+    public function setCreatedOn($createdOn) {
         $this->createdOn = $createdOn;
-    
+
         return $this;
     }
 
@@ -187,8 +191,7 @@ class Post
      *
      * @return \DateTime 
      */
-    public function getCreatedOn()
-    {
+    public function getCreatedOn() {
         return $this->createdOn;
     }
 
@@ -198,10 +201,9 @@ class Post
      * @param \DateTime $updatedOn
      * @return Post
      */
-    public function setUpdatedOn($updatedOn)
-    {
+    public function setUpdatedOn($updatedOn) {
         $this->updatedOn = $updatedOn;
-    
+
         return $this;
     }
 
@@ -210,8 +212,7 @@ class Post
      *
      * @return \DateTime 
      */
-    public function getUpdatedOn()
-    {
+    public function getUpdatedOn() {
         return $this->updatedOn;
     }
 
@@ -221,10 +222,9 @@ class Post
      * @param boolean $isActive
      * @return Post
      */
-    public function setIsActive($isActive)
-    {
+    public function setIsActive($isActive) {
         $this->isActive = $isActive;
-    
+
         return $this;
     }
 
@@ -233,8 +233,7 @@ class Post
      *
      * @return boolean 
      */
-    public function getIsActive()
-    {
+    public function getIsActive() {
         return $this->isActive;
     }
 
@@ -244,10 +243,9 @@ class Post
      * @param \Homepage\BlogBundle\Entity\PostsCategory $postsCategory
      * @return Post
      */
-    public function setPostsCategory(\Homepage\BlogBundle\Entity\PostsCategory $postsCategory = null)
-    {
+    public function setPostsCategory(\Homepage\BlogBundle\Entity\PostsCategory $postsCategory = null) {
         $this->postsCategory = $postsCategory;
-    
+
         return $this;
     }
 
@@ -256,8 +254,7 @@ class Post
      *
      * @return \Homepage\BlogBundle\Entity\PostsCategory 
      */
-    public function getPostsCategory()
-    {
+    public function getPostsCategory() {
         return $this->postsCategory;
     }
 
@@ -267,10 +264,9 @@ class Post
      * @param \Homepage\BlogBundle\Entity\User $user
      * @return Post
      */
-    public function setUser(\Homepage\BlogBundle\Entity\User $user = null)
-    {
+    public function setUser(\Homepage\BlogBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
@@ -279,8 +275,8 @@ class Post
      *
      * @return \Homepage\BlogBundle\Entity\User 
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
+
 }

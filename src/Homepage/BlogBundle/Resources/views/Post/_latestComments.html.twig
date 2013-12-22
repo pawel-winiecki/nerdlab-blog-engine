@@ -5,7 +5,7 @@
     <div class="panel-body">
         <ul class="latest-comments">
 {% for comment in comments %}
-            <li><a href="{{ url('homepage_blog_post',{'link' : comment.getPostPost().getLink()}) }}">{{ comment.getContent()|slice(0,20) }}...</a></li>
+            <li><a href="{{ url('homepage_blog_post',{'link' : comment.getPost().getLink()}) }}#comment-{{ comment.getId() }}">{{ comment.getContent()|striptags|slice(0,20) }}...</a></li>
 {% endfor %}
         </ul>
     </div>

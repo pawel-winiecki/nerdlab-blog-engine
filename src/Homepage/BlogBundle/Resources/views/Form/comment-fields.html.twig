@@ -1,0 +1,19 @@
+{% extends 'HomepageBlogBundle:Form:fields.html.twig' %}
+{% block form_row %}
+{% spaceless %}
+<div class="form-group col-xs-12">
+    <div class="controls">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+</div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block button_row %}
+{% spaceless %}
+<div class="form-group col-xs-12">
+    {{ form_widget(form) }}
+</div>
+{% endspaceless %}
+{% endblock button_row %}

@@ -11,22 +11,44 @@
         {{ errorMessage }}
 </div>
 {% endfor %}
+    {% if postsCategory is defined %}
+<h2>Kategoria :: {{ postsCategory.getCategoryName() }}</h2>    
+    {% endif %}
     {% if posts %}
         {% for post in posts %}
-<h2>{{ post.getTitle() }}</h2>
-<p>{{ post.getShortContent()|raw }}</p>
-<a href="{{ path('homepage_blog_post', {'link': post.getLink()}) }}" />czytaj więcej</a>
+<div class="post">
+    <h3>{{ post.getTitle() }}</h3>
+    <div class="row post-meta">
+        <div class="col-sm-6 small"><a href="{{ url('homepage_blog_category',{'category' : post.getPostsCategory().getLink()}) }}">{{ post.getPostsCategory().getCategoryName() }}</a></div>
+        <div class="col-sm-6 small text-right"><a class="author" href="{{ url('homepage_blog_user_view',{'login' : post.getUser().getLogin()}) }}" >{{ post.getUser().getLogin() }}</a> <time>{{ post.getCreatedOn()|localizeddate('medium', 'none', global_locale ) }}</time></div>
+    </div>
+    <p>{{ post.getShortContent()|raw }}</p>
+    <a href="{{ path('homepage_blog_post', {'link': post.getLink()}) }}" />czytaj więcej</a>
+</div>
+<hr />
         {% endfor %}
 <div class="pagination-container">
     <ul class="pager">
                 {% if hasPreviousPosts %}
-        <li>
-            <a class="pull-left" href="{{ path('homepage_blog_index_page', {'page': currentPage-1}) }}" >Poprzednie wpisy</a>
+                    {% if postsCategory is defined %}
+                        {% set previousPath = path('homepage_blog_category_page', 
+                                                {'page': currentPage + 1, 'category': postsCategory.getLink()}) %}
+                    {% else %}
+                        {% set previousPath = path('homepage_blog_index_page', {'page': currentPage + 1}) %}
+                    {% endif %}
+        <li class="previous" >
+            <a href="{{ previousPath }}" >Poprzednie wpisy</a>
         </li>
                 {% endif %}
                 {% if hasNextPosts %}
-        <li>
-            <a class="pull-right" href="{{ path('homepage_blog_index_page', {'page': currentPage+1}) }}" >Następne wpisy</a>
+                    {% if postsCategory is defined %}
+                        {% set nextPath = path('homepage_blog_category_page', 
+                                                {'page': currentPage - 1, 'category': postsCategory.getLink()}) %}
+                    {% else %}
+                        {% set nextPath = path('homepage_blog_index_page', {'page': currentPage - 1}) %}
+                    {% endif %}
+        <li class="next">
+            <a href="{{ nextPath }}" >Następne wpisy</a>
         </li>
                 {% endif %}
     </ul>

@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/signin.css') }}">
 {% endblock %}
 
-{% block main %}
+{% block container %}
 
 {% for successMessage in app.session.flashbag.get('success-notice') %}
 <div class="alert alert-success">
@@ -18,22 +18,22 @@
 </div>
 {% endif %}
 
-<form class="form-signin panel panel-info" action="{{ path('login_check') }}" method="post">
+<form class="form-signin panel panel-default" action="{{ path('login_check') }}" method="post">
     <div class="panel-heading">    
         <h2 class="panel-title text-center">Zaloguj się</h2>
     </div>
     <div class="panel-body">
-    <input type="text" name="_username" class="form-control" placeholder="Login" required autofocus>
-    <input type="password" name="_password" class="form-control" placeholder="Password" required>
-    <label class="checkbox">
-        <input type="checkbox" name="_remember_me"> Pamiętaj mnie
-    </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
-    <p class="text-center spacer-top-10"><a class="small" href="{{ path('homepage_blog_psw_forgotten') }}">Nie pamiętasz hasła?</a></p>
+        <input type="text" name="_username" class="form-control" placeholder="Login" title="Login" required autofocus>
+        <input type="password" name="_password" class="form-control" placeholder="Hasło" title="Hasło" required>
+        <label class="checkbox">
+            <input type="checkbox" name="_remember_me"> Pamiętaj mnie
+        </label>
+        <button class="btn btn-lg btn-success btn-block" type="submit">Zaloguj się</button>
+        <p class="text-center"><a class="small" href="{{ path('homepage_blog_psw_forgotten') }}">Nie pamiętasz hasła?</a></p>
     </div>
 </form>
 <div class="block text-center">
-    <h3 class="text-center">Nie masz jeszcze konta?</h3>
-    <a class="btn btn-success btn-sm" href="{{ path('homepage_blog_user_create') }}">Zarejestruj się</a>
+    <h4 class="text-center">Nie masz jeszcze konta?</h4>
+    <a class="btn btn-primary btn-sm btn-register" href="{{ path('homepage_blog_user_create') }}">Zarejestruj się</a>
 </div>
 {% endblock %}
