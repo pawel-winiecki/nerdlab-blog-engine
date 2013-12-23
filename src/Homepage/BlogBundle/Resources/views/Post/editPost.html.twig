@@ -8,4 +8,16 @@
 {{ form_end(form) }}
 {% endblock %} 
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/lib/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('js/lib/tinymce/jquery.tinymce.min.js') }}"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea#form_longContent",
+        language : 'pl',
+        plugins: [
+            "code"
+        ]
+    });
+</script>
+{% endblock %}

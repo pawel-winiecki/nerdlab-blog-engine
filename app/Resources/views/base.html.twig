@@ -96,11 +96,11 @@
                 <p>&copy;2013 Paweł Winiecki | <a href="{{ path('homepage_blog_cookies') }}">Polityka cookies.</a></p>
             </div>
         </footer>
-        {% block javascripts %}{% endblock %}
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/lib/bootstrap/bootstrap.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -154,7 +154,7 @@ class PostController extends Controller {
                                 ->where('g.isActive = 1');
                     },))
                         ->add('shortContent', 'textarea', array('label' => 'Krótka treść'))
-                        ->add('longContent', 'textarea', array('label' => 'Pełna treść'))
+                        ->add('longContent', 'textarea', array('required' => false, 'label' => 'Pełna treść'))
                         ->add('save', 'submit', array('label' => $label))
                         ->getForm();
     }
