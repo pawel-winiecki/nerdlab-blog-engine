@@ -56,3 +56,22 @@ Homepage\BlogBundle\Form\Model\ForgottenPassword:
             - Email:
                 message: Email "{{ value }}" nie jest prawidłowy.
                 checkMX: true
+
+Homepage\BlogBundle\Form\Model\Message:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                minMessage: "Imię nie może być krótsze niż {{ limit }} znaków."
+        subject:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                minMessage: "Temat nie może być krótszy niż {{ limit }} znaków."
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+                

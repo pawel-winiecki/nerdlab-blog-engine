@@ -10,6 +10,10 @@ homepage_blog_category:
 homepage_blog_category_page:
     pattern:  /category/{category}/page/{page}.html
     defaults: { _controller: HomepageBlogBundle:Blog:index }
+    
+homepage_blog_contact:
+    pattern:  /kontakt.html
+    defaults: { _controller: HomepageBlogBundle:Contact:contact }
 
 homepage_blog_post_create:
     pattern:  /post/create

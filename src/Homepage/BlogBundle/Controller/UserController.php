@@ -176,10 +176,10 @@ class UserController extends DefaultController {
 
         $message = \Swift_Message::newInstance()
                 ->setSubject('Mail powitalny')
-                ->setFrom('rejestracja@winiecki.com')
+                ->setFrom('kontakt@nerdlab.pl')
                 ->setTo($user->getEmail())
                 ->setBody(
-                $this->renderView('HomepageBlogBundle:User:welcomeEmail.txt.twig', $view));
+                $this->renderView('HomepageBlogBundle:User:welcomeEmail.html.twig', $view), 'text/html');
         $this->get('mailer')->send($message);
     }
     
