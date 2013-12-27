@@ -84,6 +84,7 @@
                     {% block main %}{% endblock %}
                     </div>
                     <div id="sidebar" class="col-lg-3 col-md-3">
+                        <a class="rss" href="{{ url('homepage_blog_rss') }}">Bądź na a bieżąco!</a>
                    {{ render(controller('HomepageBlogBundle:Post:latestPosts', {'max': 3})) }}
                    {{ render(controller('HomepageBlogBundle:Post:latestComments', {'max': 3})) }}
                     </div>

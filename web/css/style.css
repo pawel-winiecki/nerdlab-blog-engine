@@ -26,7 +26,7 @@ ul.help-block, ul.latest-posts, ul.latest-comments, ul.comments, ul.posts {
 }
 
 li.comment, li.post {
-    margin-top: 10px 0;
+    margin-top: 10px;
     border-bottom: 1px dotted #ddd;
 }
 
@@ -113,4 +113,19 @@ article.post .lead {
 
 #user-data .col-xs-3 {
     font-weight: bold;
+}
+
+a.rss {
+    line-height: 18px;
+    background-image: url('../img/feed-icon.png');
+    background-position: 7px 5px; 
+    background-repeat: no-repeat;
+    background-color: #f5f5f5;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 10px 15px 10px 44px;
+    color: #333333;
+    margin: 20px 0px;
+    display: block;
 }
