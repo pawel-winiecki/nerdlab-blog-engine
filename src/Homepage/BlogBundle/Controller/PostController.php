@@ -86,6 +86,8 @@ class PostController extends Controller {
         $view['form'] = $form->createView();
         $view['legend'] = 'Stworzenie nowego postu';
         $view['post'] = $post;
+        
+        $view['images'] = $this->createImagesCollection();
 
         return $this->render('HomepageBlogBundle:Post:editPost.html.twig', $view);
     }
@@ -114,6 +116,8 @@ class PostController extends Controller {
         $view['form'] = $form->createView();
         $view['legend'] = 'Edycja postu';
         $view['post'] = $post;
+        
+        $view['images'] = $this->createImagesCollection();
 
         return $this->render('HomepageBlogBundle:Post:editPost.html.twig', $view);
     }
@@ -165,6 +169,10 @@ class PostController extends Controller {
                         ->add('content', 'textarea', array('attr' => array('placeholder'=>'Skomentuj...','title'=>'Skomentuj...')))
                         ->add('save', 'submit', array('label' => 'Dodaj komentarz'))
                         ->getForm();
+    }
+    
+    private function createImagesCollection() {
+        return $this->getDoctrine()->getRepository('HomepageBlogBundle:ImageFile')->findAll();
     }
 
 }

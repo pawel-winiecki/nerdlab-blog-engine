@@ -62,3 +62,7 @@ homepage_blog_cookies:
 homepage_blog_rss:
     pattern:  /rss.xml
     defaults: { _controller: HomepageBlogBundle:XmlGenerator:rss }
+    
+homepage_blog_upload_image:
+    pattern:  /upload-image
+    defaults: { _controller: HomepageBlogBundle:File:uploadImage }

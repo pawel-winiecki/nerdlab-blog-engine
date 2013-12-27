@@ -142,6 +142,19 @@ CREATE  TABLE IF NOT EXISTS `BlogDB`.`user_has_role` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `BlogDB`.`image_file`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `BlogDB`.`image_file` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NOT NULL ,
+  `path` VARCHAR(255) NULL ,
+  `created_on` TIMESTAMP NULL DEFAULT NOW() ,
+  `updated_on` TIMESTAMP NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB;
+
 USE `BlogDB` ;
 
 GRANT SELECT, INSERT, TRIGGER ON TABLE `BlogDB`.* TO 'bloguser';

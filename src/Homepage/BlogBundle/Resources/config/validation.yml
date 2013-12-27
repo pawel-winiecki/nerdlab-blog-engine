@@ -25,18 +25,28 @@ Homepage\BlogBundle\Entity\User:
             - Length:
                 min: 8
                 minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
-                
-Homepage\BlogBundle\Entity\Post:
+Homepage\BlogBundle\Entity\User:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
-            fields: title
-            message: Istnieje post o takim tytule.
+            fields: email
+            message: Na ten email zarejestrowano już konto.
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: login
+            message: Istnieje konto o takiej nazwie.
     properties:
-        title:
+        email:
             - NotBlank: ~
-            - Length:
-                min: 8
-                minMessage: "Tytuł nie może być krótszy niż {{ limit }} znaków."
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+                
+Homepage\BlogBundle\Entity\ImageFile:
+    properties:
+        name:
+            - NotBlank: ~
+        file:
+            - File:
+                maxSize: 6000000
                 
 Homepage\BlogBundle\Form\Model\ChangePassword:
     properties:
