@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% form_theme form 'HomepageBlogBundle:Form:fields.html.twig' %}
 
-{% block title %}{% if post %}Edycja - {{ post.getTitle() }}{% elseif %}Stwórz nowy post{% endif %}{% endblock %}
+{% block title %}{% if post %}Edycja - {{ post.getTitle() }}{% else %}Stwórz nowy post{% endif %}{% endblock %}
 {% block robots %}noindex, follow{% endblock %}
 
 {% block main %}
