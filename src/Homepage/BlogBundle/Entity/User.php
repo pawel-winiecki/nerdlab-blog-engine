@@ -32,6 +32,11 @@ class User implements AdvancedUserInterface, \Serializable {
     private $password;
 
     /**
+     * @var string
+     */
+    private $salt;
+
+    /**
      * Plain password. Used for model validation. Must not be persisted.
      *
      * @var string
@@ -47,6 +52,11 @@ class User implements AdvancedUserInterface, \Serializable {
      * @var string
      */
     private $lastName;
+
+    /**
+     * @var string
+     */
+    private $googlePlusLink;
 
     /**
      * @var \DateTime
@@ -78,6 +88,7 @@ class User implements AdvancedUserInterface, \Serializable {
      */
     public function __construct() {
         $this->role = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->salt = md5(uniqid(null, true));
     }
 
     /**
@@ -216,6 +227,27 @@ class User implements AdvancedUserInterface, \Serializable {
     }
 
     /**
+     * Set googlePlusLink
+     *
+     * @param string $googlePlusLink
+     * @return User
+     */
+    public function setGooglePlusLink($googlePlusLink) {
+        $this->googlePlusLink = $googlePlusLink;
+
+        return $this;
+    }
+
+    /**
+     * Get googlePlusLink
+     *
+     * @return string 
+     */
+    public function getGooglePlusLink() {
+        return $this->googlePlusLink;
+    }
+
+    /**
      * Set createdOn
      *
      * @param \DateTime $createdOn
@@ -338,7 +370,7 @@ class User implements AdvancedUserInterface, \Serializable {
     }
 
     public function getSalt() {
-        return null;
+        return $this->salt;
     }
 
     public function getUsername() {
@@ -385,6 +417,17 @@ class User implements AdvancedUserInterface, \Serializable {
      * @return string
      */
     public function __toString() {
+        return $this->login;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameToShow() {
+        if ($this->firstName || $this->lastName) {
+            return trim($this->firstName . ' ' . $this->lastName);
+        }
+
         return $this->login;
     }
 

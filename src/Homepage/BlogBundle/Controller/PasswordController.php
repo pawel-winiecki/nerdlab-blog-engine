@@ -32,7 +32,7 @@ class PasswordController extends DefaultController {
 
         $form = $this->createFormBuilder($password)
                 ->setAction($this->generateUrl('homepage_blog_psw_edit', array('login' => $user->getUsername())))
-                ->add('oldPassword', 'password',array('label' => 'Stare hasło'))
+                ->add('oldPassword', 'password', array('label' => 'Stare hasło'))
                 ->add('newPassword', 'repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'The password fields must match.',
@@ -46,8 +46,14 @@ class PasswordController extends DefaultController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(hash('sha512', $password->getNewPassword()));
+            $factory = $this->get('security.encoder_factory');
+
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+            $user->setPassword($password);
+
             $user->setUpdatedOn(new \DateTime());
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
@@ -156,7 +162,12 @@ class PasswordController extends DefaultController {
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $user->setPassword(hash('sha512', $user->getPlainPassword()));
+                $factory = $this->get('security.encoder_factory');
+
+                $encoder = $factory->getEncoder($user);
+                $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+                $user->setPassword($password);
+
                 $user->setUpdatedOn(new \DateTime());
                 $em->flush();
 

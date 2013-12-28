@@ -7,6 +7,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <title>{% block title %}Blog{% endblock %} - NerdLab.pl</title>
+        <meta name="description" content="{% block description %}{% endblock %}" />
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
@@ -15,8 +16,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}{% endblock %}
 
-        <meta name="author" content="{% block author %}Paweł Winiecki{% endblock %}"/>
-        <meta name="robots" content="index, follow"/>
+        <meta name="robots" content="{% block robots %}index, follow{% endblock %}"/>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -26,7 +26,7 @@
     </head>
     <body>
         <div id="wrap">
-            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,12 +49,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ app.user.username }} <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ app.user.getNameToShow() }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ path('homepage_blog_user_view',{'login' : app.user.username}) }}">Twój profil</a></li>
                                     <li><a href="{{ path('homepage_blog_user_edit',{'login' : app.user.username}) }}">Edytuj</a></li>
                                 {% if is_granted('ROLE_AUTHOR') %}
                                     <li><a href="{{ path('homepage_blog_post_create') }}">Napisz post</a></li>
+                                    <li><a href="{{ path('homepage_blog_upload_image') }}">Dodaj obrazek</a></li>
                                 {% endif %}
                                     <li class="divider"></li>
                                     <li><a href="{{ path('logout') }}">Wyloguj się</a></li>
@@ -75,7 +76,7 @@
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
-            </div>
+            </nav>
 
             <div class="container">
                 {% block container %}
@@ -83,11 +84,11 @@
                     <div id="main-wrap" class="col-lg-9 col-md-9 ">
                     {% block main %}{% endblock %}
                     </div>
-                    <div id="sidebar" class="col-lg-3 col-md-3">
-                        <a class="rss" href="{{ url('homepage_blog_rss') }}">Bądź na a bieżąco!</a>
+                    <aside id="sidebar" class="col-lg-3 col-md-3">
+                        <a class="rss" href="{{ url('homepage_blog_rss') }}">Bądź na bieżąco!</a>
                    {{ render(controller('HomepageBlogBundle:Post:latestPosts', {'max': 3})) }}
                    {{ render(controller('HomepageBlogBundle:Post:latestComments', {'max': 3})) }}
-                    </div>
+                    </aside>
                 </div><!--/row-->
                 {% endblock %}
             </div><!--/.container-->

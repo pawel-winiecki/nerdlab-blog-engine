@@ -25,6 +25,8 @@ Homepage\BlogBundle\Entity\User:
             - Length:
                 min: 8
                 minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
+        googlePlusLink:
+            - Url: ~
 Homepage\BlogBundle\Entity\User:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 

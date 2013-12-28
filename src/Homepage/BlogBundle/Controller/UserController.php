@@ -10,7 +10,6 @@ namespace Homepage\BlogBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Homepage\BlogBundle\Entity\User;
-
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -26,10 +25,10 @@ class UserController extends DefaultController {
         $view['user'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
 
         $view['isClientUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
-        
+
         //$view['isAuthor'] = $view['user']->hasRole('ROLE_AUTHOR');
-        
-        $view['comments'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Comment')->findByUser($view['user'],null,array('createdOn' => 'ASC'));
+
+        $view['comments'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Comment')->findByUser($view['user'], null, array('createdOn' => 'ASC'));
         $view['posts'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')->findByUser($view['user']);
 
         return $this->render('HomepageBlogBundle:User:viewUser.html.twig', $view);
@@ -63,14 +62,20 @@ class UserController extends DefaultController {
                     'first_options' => array('label' => 'Email'),
                     'second_options' => array('label' => 'Powtórz Email'),
                 ))
-                ->add('save', 'submit',array('label' => 'Zarejestruj się'))
+                ->add('save', 'submit', array('label' => 'Zarejestruj się'))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setCreatedOn(new \DateTime());
-            $user->setPassword(hash('sha512', $user->getPlainPassword()));
+
+            $factory = $this->get('security.encoder_factory');
+
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+            $user->setPassword($password);
+
             $user->setIsActive(0);
 
             $em = $this->getDoctrine()->getManager();
@@ -140,13 +145,19 @@ class UserController extends DefaultController {
 
         $view = array();
 
-        $form = $this->createFormBuilder($user)
+        $cfb = $this->createFormBuilder($user)
                 ->setAction($this->generateUrl('homepage_blog_user_edit', array('login' => $user->getUsername())))
                 ->add('firstName', 'text', array('required' => false, 'label' => 'Imię'))
-                ->add('lastName', 'text', array('required' => false, 'label' => 'Nazwisko'))
-                ->add('email', 'email', array('label' => 'Email'))
-                ->add('save', 'submit', array('label' => 'Zapisz'))
-                ->getForm();
+                ->add('lastName', 'text', array('required' => false, 'label' => 'Nazwisko'));
+
+        if ($this->get('security.context')->isGranted('ROLE_AUTHOR')) {
+            $cfb->add('googlePlusLink', 'text', array('required' => false, 'label' => 'Google+ Link'));
+        }
+
+        $cfb->add('email', 'email', array('label' => 'Email'))
+                ->add('save', 'submit', array('label' => 'Zapisz'));
+
+        $form = $cfb->getForm();
 
         $form->handleRequest($request);
 
@@ -182,5 +193,5 @@ class UserController extends DefaultController {
                 $this->renderView('HomepageBlogBundle:User:welcomeEmail.html.twig', $view), 'text/html');
         $this->get('mailer')->send($message);
     }
-    
+
 }

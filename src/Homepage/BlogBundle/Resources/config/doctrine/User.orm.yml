@@ -25,6 +25,11 @@ Homepage\BlogBundle\Entity\User:
             length: 128
             fixed: false
             nullable: false
+        salt:
+            type: string
+            length: 32
+            fixed: false
+            nullable: true
         firstName:
             type: string
             length: 45
@@ -37,6 +42,12 @@ Homepage\BlogBundle\Entity\User:
             fixed: false
             nullable: true
             column: last_name
+        googlePlusLink:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+            column: google_plus_link
         createdOn:
             type: datetime
             nullable: true
