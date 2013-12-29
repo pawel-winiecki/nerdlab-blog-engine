@@ -2,38 +2,14 @@ homepage_blog_index:
     pattern:  /
     defaults: { _controller: HomepageBlogBundle:Blog:index, page:0 }
 homepage_blog_index_page:
-    pattern:  /page/{page}.html
+    pattern:  /page/{page}/
     defaults: { _controller: HomepageBlogBundle:Blog:index }
 homepage_blog_category:
     pattern:  /category/{category}/
     defaults: { _controller: HomepageBlogBundle:Blog:index, page:0 }
 homepage_blog_category_page:
-    pattern:  /category/{category}/page/{page}.html
+    pattern:  /category/{category}/page/{page}/
     defaults: { _controller: HomepageBlogBundle:Blog:index }
-    
-homepage_blog_contact:
-    pattern:  /kontakt.html
-    defaults: { _controller: HomepageBlogBundle:Contact:contact }
-
-homepage_blog_post_create:
-    pattern:  /post/create
-    defaults: { _controller: HomepageBlogBundle:Post:createPost }
-homepage_blog_post:
-    pattern:  /post/{link}.html
-    defaults: { _controller: HomepageBlogBundle:Post:showPost }
-homepage_blog_post_edit:
-    pattern:  /post/{link}/edit
-    defaults: { _controller: HomepageBlogBundle:Post:editPost }
-    
-homepage_blog_psw_edit:
-    pattern:  /user/{login}/edit/changepsw
-    defaults: { _controller: HomepageBlogBundle:Password:changePsw }
-homepage_blog_psw_reset:
-    pattern:  /reset-password
-    defaults: { _controller: HomepageBlogBundle:Password:resetPsw }
-homepage_blog_psw_forgotten:
-    pattern:  /forgotten-password
-    defaults: { _controller: HomepageBlogBundle:Password:forgottenPsw }
     
 homepage_blog_user_view:
     pattern:  /user/{login}/view/
@@ -47,18 +23,26 @@ homepage_blog_user_create:
 homepage_blog_user_activate:
     pattern:  /activate/
     defaults: { _controller: HomepageBlogBundle:User:activate }
+homepage_blog_contact:
+    pattern:  /kontakt/
+    defaults: { _controller: HomepageBlogBundle:Contact:contact }
     
-homepage_blog_privacy:
-    path: /polityka-prywatnosci.html
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template: 'HomepageBlogBundle:Static:privacy.html.twig'
+homepage_blog_psw_edit:
+    pattern:  /user/{login}/edit/change-password/
+    defaults: { _controller: HomepageBlogBundle:Password:changePsw }
+homepage_blog_psw_reset:
+    pattern:  /reset-password/
+    defaults: { _controller: HomepageBlogBundle:Password:resetPsw }
+homepage_blog_psw_forgotten:
+    pattern:  /forgotten-password/
+    defaults: { _controller: HomepageBlogBundle:Password:forgottenPsw } 
+
 homepage_blog_cookies:
-    path: /polityka-cookies.html
+    path: /polityka-cookies/
     defaults:
         _controller: FrameworkBundle:Template:template
-        template: 'HomepageBlogBundle:Static:cookies.html.twig'
-        
+        template: 'HomepageBlogBundle:Static:cookies-policy.html.twig'
+               
 homepage_blog_rss:
     pattern:  /rss.xml
     defaults: { _controller: HomepageBlogBundle:XmlGenerator:rss }
@@ -66,3 +50,14 @@ homepage_blog_rss:
 homepage_blog_upload_image:
     pattern:  /upload-image
     defaults: { _controller: HomepageBlogBundle:File:uploadImage }
+
+homepage_blog_post_create:
+    pattern:  /create-post/
+    defaults: { _controller: HomepageBlogBundle:Post:createPost }
+homepage_blog_post:
+    pattern:  /{link}/
+    defaults: { _controller: HomepageBlogBundle:Post:showPost }
+homepage_blog_post_edit:
+    pattern:  /{link}/edit
+    defaults: { _controller: HomepageBlogBundle:Post:editPost }
+
