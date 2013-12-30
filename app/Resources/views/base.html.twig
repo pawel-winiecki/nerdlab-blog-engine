@@ -8,6 +8,7 @@
 
         <title>{% block title %}Blog{% endblock %} - NerdLab.pl</title>
         <meta name="description" content="{% block description %}{% endblock %}" />
+        {% block metatags %}{% endblock %}
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">

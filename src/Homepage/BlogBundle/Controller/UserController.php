@@ -19,12 +19,16 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class UserController extends DefaultController {
 
-    public function indexAction($login) {
+    public function viewAction($login) {
         $view = array();
 
         $view['user'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
 
-        $view['isClientUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
+        if ($this->getUser()) {
+            $view['isClientUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
+        } else {
+            $view['isClientUser'] = false;
+        }
 
         //$view['isAuthor'] = $view['user']->hasRole('ROLE_AUTHOR');
 

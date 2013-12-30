@@ -1,4 +1,6 @@
 {% extends '::base.html.twig' %}
+{% block title %}Edycja: {{ user.getLogin() }}{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
 {% form_theme form 'HomepageBlogBundle:Form:fields.html.twig' %}
 {% block main %}
 <h2>{{ user.getLogin() }}</h2>

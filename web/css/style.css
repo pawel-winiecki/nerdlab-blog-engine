@@ -26,8 +26,13 @@ ul.help-block, ul.latest-posts, ul.latest-comments, ul.comments, ul.posts {
 }
 
 li.comment, li.post {
-    margin-top: 10px;
+    margin-top: 20px;
+    padding-bottom: 20px;
     border-bottom: 1px dotted #ddd;
+}
+
+li.comment:last-child, li.post:last-child {
+    border-bottom: none;
 }
 
 .form-horizontal .alert {
@@ -64,7 +69,7 @@ footer p {
     padding: 60px 15px 20px;
 }
 
-div.post .post-meta {
+.post .post-meta {
     margin-bottom: 10px;
 }
 

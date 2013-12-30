@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}Profil użytkownika: {{ user.getUsername() }}{% endblock %}
+
 {% block main %}
 
 {% for successMessage in app.session.flashbag.get('success-notice') %}
@@ -8,7 +10,8 @@
 </div>
 {% endfor %}
 
-<h2>{{ user.getUsername() }}</h2>
+<h2>{{ user.getNameToShow() }}</h2>
+{% if is_granted('ROLE_USER') %}
 <div id="user-data">
     <div class="row">
         <div class="col-xs-3">
@@ -16,6 +19,14 @@
         </div>
         <div class="col-xs-9">
         {{ user.getCreatedOn()|localizeddate('medium', 'none', global_locale) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            Login:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getUsername() }}
         </div>
     </div>
     <div class="row">
@@ -50,10 +61,11 @@
     </div>
     {% endif %}
 </div>
+{% endif %}
 {% if posts %}
 <h3>{% if isClientUser %}Twoje Posty{% else %}Posty użytkownika{% endif %}</h3>
-        {% for post in posts %}
 <ul class="posts">
+    {% for post in posts %}
     <li class="post">
         <h4>{{ post.title }}</h4>
         <div class="row post-meta">
@@ -66,9 +78,9 @@
         {% endfor %}
 </ul>
 {% endif %}
-<h3>{% if isClientUser %}Twoje komentarze{% else %}Komentarze użytkownika{% endif %}</h3>
-{% if comments %}
 <hr />
+<h3>{% if isClientUser %}Twoje komentarze{% else %}Komentarze użytkownika {{ user.getNameToShow() }}{% endif %}</h3>
+{% if comments %}
 <ul class="comments">
             {% for comment in comments %}
     <li class="comment" id="comment-{{ comment.getId() }}" >
@@ -77,5 +89,7 @@
             {% endfor %}
     </li>
 </ul>
-        {% endif %}
+{% else %}
+<p>Użytkownik nie dodał jeszcze żadnego komentarza.</p>
+{% endif %}
 {% endblock %}

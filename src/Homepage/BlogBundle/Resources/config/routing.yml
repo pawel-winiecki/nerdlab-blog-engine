@@ -11,12 +11,12 @@ homepage_blog_category_page:
     pattern:  /category/{category}/page/{page}/
     defaults: { _controller: HomepageBlogBundle:Blog:index }
     
-homepage_blog_user_view:
-    pattern:  /user/{login}/view/
-    defaults: { _controller: HomepageBlogBundle:User:index }
 homepage_blog_user_edit:
     pattern:  /user/{login}/edit/
     defaults: { _controller: HomepageBlogBundle:User:edit }
+homepage_blog_user_view:
+    pattern:  /user/{login}/
+    defaults: { _controller: HomepageBlogBundle:User:view }
 homepage_blog_user_create:
     pattern:  /register/
     defaults: { _controller: HomepageBlogBundle:User:create }
@@ -58,6 +58,6 @@ homepage_blog_post:
     pattern:  /{link}/
     defaults: { _controller: HomepageBlogBundle:Post:showPost }
 homepage_blog_post_edit:
-    pattern:  /{link}/edit
+    pattern:  /{link}/edit/
     defaults: { _controller: HomepageBlogBundle:Post:editPost }
 
