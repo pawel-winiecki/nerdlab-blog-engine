@@ -17,6 +17,9 @@ homepage_blog_user_edit:
 homepage_blog_user_view:
     pattern:  /user/{login}/
     defaults: { _controller: HomepageBlogBundle:User:view }
+homepage_blog_user_author:
+    pattern:  /author/{login}/
+    defaults: { _controller: HomepageBlogBundle:User:viewAuthor }
 homepage_blog_user_create:
     pattern:  /register/
     defaults: { _controller: HomepageBlogBundle:User:create }

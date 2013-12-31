@@ -62,24 +62,8 @@
     {% endif %}
 </div>
 {% endif %}
-{% if posts %}
-<h3>{% if isClientUser %}Twoje Posty{% else %}Posty użytkownika{% endif %}</h3>
-<ul class="posts">
-    {% for post in posts %}
-    <li class="post">
-        <h4>{{ post.title }}</h4>
-        <div class="row post-meta">
-            <div class="col-sm-6 small"><a href="{{ url('homepage_blog_category',{'category' : post.getPostsCategory().getLink()}) }}">{{ post.getPostsCategory().getCategoryName() }}</a></div>
-            <div class="col-sm-6 small text-right"><a class="author" href="{{ url('homepage_blog_user_view',{'login' : post.getUser().getLogin()}) }}" >{{ post.getUser().getLogin() }}</a> <time>{{ post.getCreatedOn()|localizeddate('medium', 'none', global_locale ) }}</time></div>
-        </div>
-        <p>{{ post.getShortContent()|raw }}</p>
-        <a href="{{ path('homepage_blog_post', {'link': post.getLink()}) }}" />czytaj więcej</a>
-    </li>
-        {% endfor %}
-</ul>
-{% endif %}
 <hr />
-<h3>{% if isClientUser %}Twoje komentarze{% else %}Komentarze użytkownika {{ user.getNameToShow() }}{% endif %}</h3>
+<h3>{% if isClientUser %}Twoje komentarze{% else %}Komentarze użytkownika{% endif %}</h3>
 {% if comments %}
 <ul class="comments">
             {% for comment in comments %}

@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Author: {{ user.getNameToShow() }}{% endblock %}
+
+{% block main %}
+
+{% for successMessage in app.session.flashbag.get('success-notice') %}
+<div class="alert alert-success">
+        {{ successMessage }}
+</div>
+{% endfor %}
+
+<h1>{{ user.getNameToShow() }}</h1>
+{% if posts %}
+<h3>Wpisy tego autora:</h3>
+<ul class="posts">
+    {% for post in posts %}
+    <li class="post">
+        <h4>{{ post.title }}</h4>
+        <div class="row post-meta">
+            <div class="col-sm-6 small"><a href="{{ url('homepage_blog_category',{'category' : post.getPostsCategory().getLink()}) }}">{{ post.getPostsCategory().getCategoryName() }}</a></div>
+            <div class="col-sm-6 small text-right"><time>{{ post.getCreatedOn()|localizeddate('medium', 'none', global_locale ) }}</time></div>
+        </div>
+        <p>{{ post.getShortContent()|raw }}</p>
+        <a href="{{ path('homepage_blog_post', {'link': post.getLink()}) }}" />czytaj więcej</a>
+    </li>
+        {% endfor %}
+</ul>
+{% endif %}
+<hr />
+<h3>Komentarze tego autora</h3>
+{% if comments %}
+<ul class="comments">
+            {% for comment in comments %}
+    <li class="comment" id="comment-{{ comment.getId() }}" >
+        <p><a class="author" href='{{ url('homepage_blog_user_view', {'login' : comment.getUser().getLogin()}) }}'>{{ comment.getUser().getLogin() }}</a> <time>{{ comment.getCreatedOn()|localizeddate('medium', 'short', global_locale) }}</time></p>
+        <p>{{ comment.getContent()|raw }}</p>
+            {% endfor %}
+    </li>
+</ul>
+{% else %}
+<p>Użytkownik nie dodał jeszcze żadnego komentarza.</p>
+{% endif %}
+{% endblock %}

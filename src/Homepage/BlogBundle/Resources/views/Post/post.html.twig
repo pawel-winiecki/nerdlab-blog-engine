@@ -49,7 +49,7 @@
             {% for comment in comments %}
     <li class="comment" id="comment-{{ comment.getId() }}" >
         <article>
-            <p><a class="author" href='{{ url('homepage_blog_user_view', {'login' : comment.getUser().getLogin()}) }}'>{{ post.getUser().getNameToShow() }}</a> <time datetime="{{ comment.getCreatedOn()|date("Y-m-d H:i")}}">{{ comment.getCreatedOn()|localizeddate('medium', 'short', global_locale) }}</time></p>
+            <p><a class="author" href='{{ url('homepage_blog_user_author', {'login' : comment.getUser().getLogin()}) }}'>{{ post.getUser().getNameToShow() }}</a> <time datetime="{{ comment.getCreatedOn()|date("Y-m-d H:i")}}">{{ comment.getCreatedOn()|localizeddate('medium', 'short', global_locale) }}</time></p>
             <p>{{ comment.getContent()|raw }}</p>
             {% endfor %}
         </article>

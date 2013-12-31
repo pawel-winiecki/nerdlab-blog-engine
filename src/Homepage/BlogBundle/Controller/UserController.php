@@ -23,7 +23,11 @@ class UserController extends DefaultController {
         $view = array();
 
         $view['user'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
-
+        
+        if(!$view['user']) {
+            throw $this->createNotFoundException('Nie ma takiego użytkownika');
+        }
+        
         if ($this->getUser()) {
             $view['isClientUser'] = $view['user']->getUsername() == $this->getUser()->getUsername();
         } else {
@@ -36,6 +40,24 @@ class UserController extends DefaultController {
         $view['posts'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')->findByUser($view['user']);
 
         return $this->render('HomepageBlogBundle:User:viewUser.html.twig', $view);
+    }
+    
+    public function viewAuthorAction($login) {
+        $view = array();
+        
+        $user = $this->getDoctrine()->getRepository('HomepageBlogBundle:User')->findOneByLogin($login);
+        $posts = $this->getDoctrine()->getRepository('HomepageBlogBundle:Post')->findByUser($user);
+
+        if(!$posts || !$user) {
+            throw $this->createNotFoundException('Nie ma takiego autora');
+        }
+        
+        $view['user'] = $user;
+
+        $view['comments'] = $this->getDoctrine()->getRepository('HomepageBlogBundle:Comment')->findByUser($view['user'], null, array('createdOn' => 'ASC'));
+        $view['posts'] = $posts;
+
+        return $this->render('HomepageBlogBundle:User:viewAuthor.html.twig', $view);
     }
 
     public function createAction(Request $request) {

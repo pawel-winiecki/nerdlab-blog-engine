@@ -73,7 +73,7 @@ footer p {
     margin-bottom: 10px;
 }
 
-article.post p, div.post p {
+.post p {
     text-align: justify;
 }
 
@@ -90,7 +90,7 @@ article.post .lead {
     font-weight: bold;
 }
 
-.post-meta time:before, .comment p:first-child time:before {
+.post-meta a + time:before, .comment p:first-child time:before {
     content: "| ";
 }
 
