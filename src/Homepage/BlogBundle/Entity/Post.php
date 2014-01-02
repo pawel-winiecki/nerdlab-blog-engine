@@ -60,6 +60,11 @@ class Post {
     private $user;
 
     /**
+     * @var \Homepage\BlogBundle\Entity\ImageFile
+     */
+    private $imageFile;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -83,19 +88,19 @@ class Post {
     public function generateLinkFromTitle() {
         //remowe whitspace atd begin and end of string
         $link = trim($this->title);
-        
+
         //change big letters to small
         $link = strtolower($link);
-        
+
         //replace spaces with ndash
         $link = str_replace(' ', '-', $link);
-        
+
         //remove more than one ndash in line
         $link = preg_replace('/[\-]+/', '-', $link);
-        
+
         //convert diactric letters to ASCII letters
         $link = iconv("utf-8", "ascii//TRANSLIT", $link);
-        
+
         //remove special characters
         $link = preg_replace('/[^a-z0-9\-]/', '', $link);
 
@@ -277,6 +282,27 @@ class Post {
      */
     public function getUser() {
         return $this->user;
+    }
+
+    /**
+     * Set imageFile
+     *
+     * @param \Homepage\BlogBundle\Entity\ImageFile $imageFile
+     * @return Post
+     */
+    public function setImageFile(\Homepage\BlogBundle\Entity\ImageFile $imageFile = null) {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * Get imageFile
+     *
+     * @return \Homepage\BlogBundle\Entity\ImageFile 
+     */
+    public function getImageFile() {
+        return $this->imageFile;
     }
 
 }

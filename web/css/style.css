@@ -25,7 +25,7 @@ ul.help-block, ul.latest-posts, ul.latest-comments, ul.comments, ul.posts {
     padding-left: 0px;
 }
 
-li.comment, li.post {
+li.comment/*, li.post*/ {
     margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px dotted #ddd;
@@ -69,6 +69,28 @@ footer p {
     padding: 60px 15px 20px;
 }
 
+.post .title a {
+    color: #000000;
+}
+
+li.post a.btn:after {
+    content: "\0000A0\00BB"; 
+}
+
+li.post:after {
+  display: block;
+  content: '';
+  width: 100px;
+  height: 1px;
+  margin: 30px auto;
+  background-color: #ddd;
+  margin-bottom: 30px;
+}
+
+li.post a.btn {
+    text-align: right;
+}
+
 .post .post-meta {
     margin-bottom: 10px;
 }
@@ -76,6 +98,10 @@ footer p {
 .post p {
     text-align: justify;
 }
+
+.post img {
+    margin-bottom: 10px;
+} 
 
 article.post .lead {
     font-size: 18px;

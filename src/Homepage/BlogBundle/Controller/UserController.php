@@ -72,8 +72,6 @@ class UserController extends DefaultController {
         $form = $this->createFormBuilder($user)
                 ->setAction($this->generateUrl('homepage_blog_user_create'))
                 ->add('login', 'text')
-                ->add('firstName', 'text', array('required' => false, 'label' => 'Imię'))
-                ->add('lastName', 'text', array('required' => false, 'label' => 'Nazwisko'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'Hasło musi być takie samo.',

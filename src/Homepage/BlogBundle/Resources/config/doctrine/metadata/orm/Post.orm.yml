@@ -56,7 +56,16 @@ Post:
             mappedBy: null
             inversedBy: null
             joinColumns:
-                user_idr:
+                user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        imageFile:
+            targetEntity: ImageFile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                image_file_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

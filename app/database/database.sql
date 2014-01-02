@@ -57,12 +57,14 @@ CREATE  TABLE IF NOT EXISTS `BlogDB`.`post` (
   `is_active` TINYINT(1) NULL DEFAULT 1 ,
   `posts_category_id` INT NOT NULL ,
   `user_id` INT NOT NULL ,
+  `image_file_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `link_UNIQUE` (`link` ASC) ,
   UNIQUE INDEX `title_UNIQUE` (`title` ASC) ,
   UNIQUE INDEX `idPost_UNIQUE` (`id` ASC) ,
   INDEX `fk_post_posts_category_idx` (`posts_category_id` ASC) ,
   INDEX `fk_post_user1_idx` (`user_id` ASC) ,
+  INDEX `fk_post_image_file1_idx` (`image_file_id` ASC)
   CONSTRAINT `fk_post_posts_category`
     FOREIGN KEY (`posts_category_id` )
     REFERENCES `BlogDB`.`posts_category` (`id` )
@@ -71,6 +73,11 @@ CREATE  TABLE IF NOT EXISTS `BlogDB`.`post` (
   CONSTRAINT `fk_post_user1`
     FOREIGN KEY (`user_id` )
     REFERENCES `BlogDB`.`user` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION),
+  CONSTRAINT `fk_post_image_file1`
+    FOREIGN KEY (`image_file_id` )
+    REFERENCES `BlogDB`.`image_file` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

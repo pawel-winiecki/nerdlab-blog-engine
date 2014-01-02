@@ -225,11 +225,14 @@ class ImageFile {
         $this->file = null;
     }
 
-    public
-            function removeUpload() {
+    public function removeUpload() {
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+    
+    public function __toString() {
+        return $this->name;
     }
 
 }

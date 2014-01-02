@@ -157,6 +157,14 @@ class PostController extends Controller {
                                 ->orderBy('g.categoryName', 'ASC')
                                 ->where('g.isActive = 1');
                     },))
+                        ->add('imageFile', 'entity', array(
+                            'required' => false,
+                            'label' => 'Miniaturka',
+                            'class' => 'HomepageBlogBundle:ImageFile',
+                            'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('f')
+                                ->orderBy('f.name', 'ASC');
+                    },))
                         ->add('shortContent', 'textarea', array('label' => 'Krótka treść'))
                         ->add('longContent', 'textarea', array('required' => false, 'label' => 'Pełna treść'))
                         ->add('save', 'submit', array('label' => $label))

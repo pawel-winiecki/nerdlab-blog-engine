@@ -11,7 +11,7 @@
         {% block metatags %}{% endblock %}
 
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
 
         <!-- My own changes in bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
@@ -82,10 +82,10 @@
             <div class="container">
                 {% block container %}
                 <div class="row">
-                    <div id="main-wrap" class="col-lg-9 col-md-9 ">
+                    <div id="main-wrap" class="col-lg-8 col-md-8 ">
                     {% block main %}{% endblock %}
                     </div>
-                    <aside id="sidebar" class="col-lg-3 col-md-3">
+                    <aside id="sidebar" class="col-lg-4 col-md-4">
                         <a class="rss" href="{{ url('homepage_blog_rss') }}">Bądź na bieżąco!</a>
                    {{ render(controller('HomepageBlogBundle:Post:latestPosts', {'max': 3})) }}
                    {{ render(controller('HomepageBlogBundle:Post:latestComments', {'max': 3})) }}

@@ -40,7 +40,7 @@ function createCookie(name, value, days) {
 }
 
 function showCookiesDialog() {
-    $('body').append('<div id="cookies-dialog" style="display: block;"><p>Ta strona używa Cookies. Dowiedz się więcej o celu ich używania - przeczytaj naszą politykę prywatności.<br /> Korzystając ze strony wyrażasz zgodę na używanie cookie, zgodnie z aktualnymi ustawieniami przeglądarki. <button id="cookies_accept" class="btn btn-sm btn-success">Akceptuję</button><br /><a href="http://nerdlab.pl/polityka-cookies/">Zapoznaj się z naszą polityką cookies</a></div></p>');
+    $('body').append('<div id="cookies-dialog" style="display: block;"><p>Ta strona używa Cookies. Dowiedz się więcej o celu ich używania - przeczytaj naszą politykę prywatności.<br /> Korzystając ze strony wyrażasz zgodę na używanie cookie, zgodnie z aktualnymi ustawieniami przeglądarki. <button id="cookies_accept" class="btn btn-sm btn-success">Akceptuję</button><br /><a rel="nofollow" href="http://nerdlab.pl/polityka-cookies/">Zapoznaj się z naszą polityką cookies</a></div></p>');
     $('#cookies_accept').click(function() {
         createCookie('cookies_acceptation','accepted',365);
         $('#cookies-dialog').remove();
