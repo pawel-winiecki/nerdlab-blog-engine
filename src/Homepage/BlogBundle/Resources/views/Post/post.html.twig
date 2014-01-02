@@ -8,6 +8,7 @@
 <link rel="author" href="{{ post.getUser().getGooglePlusLink() }}/posts"/>
 {% endif %}
 {% endblock %}
+{% block stylesheets %}<link rel="stylesheet" type="text/css" href="{{ asset('css/lightbox.css') }}" />{% endblock %}
 
 {% block main %}
 {% for successMessage in app.session.flashbag.get('success-notice') %}
@@ -63,3 +64,5 @@
 <p>Nie ma takiego wpisu!</p>
     {% endif %}
 {% endblock %}
+
+{% block javascripts %}<script src="{{ asset('js/lib/lightbox/lightbox-2.6.min.js') }}"></script>{% endblock %}
