@@ -31,7 +31,7 @@
         </div>
         <hr />
         {% if post.getImageFile() %}
-        <img class="img-responsive img-thumbnail" src="{{ asset(post.getImageFile().getWebPath()) }}" />
+        <img class="img-responsive img-thumbnail" src="{{ asset(post.getImageFile().getWebPath()) }}"  alt="{{ asset(post.getImageFile().getName()) }}" />
         {% endif %}
         <p>{{ post.getShortContent()|raw }}</p>
         <div class="text-right">

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller {
 
-    private $_limit = 3;
+    private $_limit = 5;
 
     public function indexAction($page, $category = null) {
         $view = array();

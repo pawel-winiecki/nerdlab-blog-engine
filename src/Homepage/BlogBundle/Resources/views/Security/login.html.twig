@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/signin.css') }}">
 {% endblock %}
 
+{% block robots %}noindex, follow{% endblock %}
+
 {% block container %}
 
 {% for successMessage in app.session.flashbag.get('success-notice') %}
