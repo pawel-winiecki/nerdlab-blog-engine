@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Profil użytkownika: {{ user.getUsername() }}{% endblock %}
+
+{% block main %}
+
+{% for successMessage in app.session.flashbag.get('success-notice') %}
+<div class="alert alert-success">
+        {{ successMessage }}
+</div>
+{% endfor %}
+
+<h2>{{ user.getNameToShow() }}</h2>
+{% if is_granted('ROLE_USER') %}
+<div id="user-data">
+    <div class="row">
+        <div class="col-xs-3">
+            Dołączył:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getCreatedOn()|localizeddate('medium', 'none', global_locale) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            Login:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getUsername() }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            Imię:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getFirstName() }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            Nazwisko:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getLastName() }}
+        </div> 
+    </div>
+    {% if isClientUser %}
+    <div class="row">
+        <div class="col-xs-3">
+            Email:
+        </div>
+        <div class="col-xs-9">
+        {{ user.getEmail() }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-3">
+            <a class="btn btn-default" href="{{ path('nerdlab_blog_user_edit', {'login': user.getLogin()}) }}">Edytuj dane</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+<hr />
+<h3>{% if isClientUser %}Twoje komentarze{% else %}Komentarze użytkownika{% endif %}</h3>
+{% if comments %}
+<ul class="comments">
+            {% for comment in comments %}
+    <li class="comment" id="comment-{{ comment.getId() }}" >
+        <p><a class="author" href='{{ url('nerdlab_blog_user_view', {'login' : comment.getUser().getLogin()}) }}'>{{ comment.getUser().getLogin() }}</a> <time>{{ comment.getCreatedOn()|localizeddate('medium', 'short', global_locale) }}</time></p>
+        <p>{{ comment.getContent()|raw }}</p>
+            {% endfor %}
+    </li>
+</ul>
+{% else %}
+<p>Użytkownik nie dodał jeszcze żadnego komentarza.</p>
+{% endif %}
+{% endblock %}

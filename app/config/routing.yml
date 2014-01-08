@@ -9,12 +9,12 @@ _sonata_admin:
     
 login:
     path:   /login
-    defaults:  { _controller: HomepageBlogBundle:Security:login }
+    defaults:  { _controller: NerdLabBlogBundle:Security:login }
 login_check:
     path:   /login_check
 logout:
     path:   /logout
     
-homepage_blog:
-    resource: "@HomepageBlogBundle/Resources/config/routing.yml"
+nerdlab_blog:
+    resource: "@NerdLabBlogBundle/Resources/config/routing.yml"
     prefix:   /

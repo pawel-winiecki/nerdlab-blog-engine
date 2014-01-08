@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'NerdLabBlogBundle:Form:fields.html.twig' %}
+{% block robots %}noindex, follow{% endblock %}
+
+{% block main %}
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<legend>Edytuj hasło</legend>
+{{ form_end(form) }}
+{% endblock %} 

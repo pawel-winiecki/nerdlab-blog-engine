@@ -1,0 +1,39 @@
+NerdLab\BlogBundle\Entity\Role:
+    type: entity
+    table: role
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: id
+            generator:
+                strategy: IDENTITY
+        roleName:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+            column: role_name
+        createdOn:
+            type: datetime
+            nullable: true
+            column: created_on
+        updatedOn:
+            type: datetime
+            nullable: true
+            column: updated_on
+        isActive:
+            type: boolean
+            nullable: true
+            column: is_active
+    manyToMany:
+        user:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: role
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

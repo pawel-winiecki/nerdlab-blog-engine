@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+            <h4 class="panel-title">Najnowsze posty</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="latest-posts">
+{% for post in posts %}
+            <li><a href="{{ url('nerdlab_blog_post',{'link' : post.getLink()}) }}">{{ post.getTitle() }}</a></li>
+{% endfor %}
+        </ul>
+    </div>
+</div>

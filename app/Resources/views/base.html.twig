@@ -38,27 +38,27 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{{ path('homepage_blog_index') }}"><span class="nerd-logo"></span> NerdLab.pl</a>
+                        <a class="navbar-brand" href="{{ path('nerdlab_blog_index') }}"><span class="nerd-logo"></span> NerdLab.pl</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategorie <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                            {{ render(controller('HomepageBlogBundle:Blog:categoryList')) }}
+                            {{ render(controller('NerdLabBlogBundle:Blog:categoryList')) }}
                                 </ul></li>
-                            <li><a href="{{ path('homepage_blog_contact') }}">Kontakt</a></li>
+                            <li><a href="{{ path('nerdlab_blog_contact') }}">Kontakt</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ app.user.getNameToShow() }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('homepage_blog_user_view',{'login' : app.user.username}) }}">Twój profil</a></li>
-                                    <li><a href="{{ path('homepage_blog_user_edit',{'login' : app.user.username}) }}">Edytuj</a></li>
+                                    <li><a href="{{ path('nerdlab_blog_user_view',{'login' : app.user.username}) }}">Twój profil</a></li>
+                                    <li><a href="{{ path('nerdlab_blog_user_edit',{'login' : app.user.username}) }}">Edytuj</a></li>
                                 {% if is_granted('ROLE_AUTHOR') %}
-                                    <li><a href="{{ path('homepage_blog_post_create') }}">Napisz post</a></li>
-                                    <li><a href="{{ path('homepage_blog_upload_image') }}">Dodaj obrazek</a></li>
+                                    <li><a href="{{ path('nerdlab_blog_post_create') }}">Napisz post</a></li>
+                                    <li><a href="{{ path('nerdlab_blog_upload_image') }}">Dodaj obrazek</a></li>
                                 {% endif %}
                                     <li class="divider"></li>
                                     <li><a href="{{ path('logout') }}">Wyloguj się</a></li>
@@ -66,7 +66,7 @@
                             </li>
                                 {% else %}
                             <li>
-                                <a href="{{ path('homepage_blog_user_create') }}" >
+                                <a href="{{ path('nerdlab_blog_user_create') }}" >
                                     Zarejestruj się
                                 </a>
                             </li>
@@ -88,9 +88,9 @@
                     {% block main %}{% endblock %}
                     </div>
                     <aside id="sidebar" class="col-lg-4 col-md-4">
-                        <a class="rss" href="{{ url('homepage_blog_rss') }}">Bądź na bieżąco!</a>
-                   {{ render(controller('HomepageBlogBundle:Post:latestPosts', {'max': 3})) }}
-                   {{ render(controller('HomepageBlogBundle:Post:latestComments', {'max': 3})) }}
+                        <a class="rss" href="{{ url('nerdlab_blog_rss') }}">Bądź na bieżąco!</a>
+                   {{ render(controller('NerdLabBlogBundle:Post:latestPosts', {'max': 3})) }}
+                   {{ render(controller('NerdLabBlogBundle:Post:latestComments', {'max': 3})) }}
                     </aside>
                 </div><!--/row-->
                 {% endblock %}
@@ -98,7 +98,7 @@
         </div>
         <footer id="footer">
             <div class="container">
-                <p>&copy;2013 Paweł Winiecki | <a href="{{ path('homepage_blog_cookies') }}" >Polityka cookies.</a></p>
+                <p>&copy;2013 Paweł Winiecki | <a href="{{ path('nerdlab_blog_cookies') }}" >Polityka cookies.</a></p>
             </div>
         </footer>
         <!-- Bootstrap core JavaScript

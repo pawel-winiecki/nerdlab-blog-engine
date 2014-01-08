@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+{% block title %}Edycja: {{ user.getLogin() }}{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+{% form_theme form 'NerdLabBlogBundle:Form:fields.html.twig' %}
+{% block main %}
+<h2>{{ user.getLogin() }}</h2>
+<p><a href="{{ path('nerdlab_blog_psw_edit',{'login': user.login}) }}">Zmień hasło</a></p>
+{{ form_start(form) }}
+<legend>Edytuj dane</legend>
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,89 @@
+NerdLab\BlogBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: email
+            message: Na ten email zarejestrowano już konto.
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: login
+            message: Istnieje konto o takiej nazwie.
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+        login:
+            - NotBlank: ~
+            - Regex: 
+                pattern: "/^[A-Za-z][A-Za-z0-9\._\-]*$/"
+                message: "Możesz używać litery, cyfry, kropki, podkreślniki i myślniki."
+            - Length:
+                min: 8
+                minMessage: "Login nie może być krótsze niż {{ limit }} znaków."
+        plainPassword:
+            - NotBlank: ~
+            - Length:
+                min: 8
+                minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
+        googlePlusLink:
+            - Url: ~
+NerdLab\BlogBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: email
+            message: Na ten email zarejestrowano już konto.
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: login
+            message: Istnieje konto o takiej nazwie.
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+                
+NerdLab\BlogBundle\Entity\ImageFile:
+    properties:
+        name:
+            - NotBlank: ~
+        file:
+            - File:
+                maxSize: 6000000
+                
+NerdLab\BlogBundle\Form\Model\ChangePassword:
+    properties:
+        oldPassword:
+            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+                message: "Wprowadziłeś złe aktualne hasło."
+        newPassword:
+            - NotBlank: ~
+            - Length:
+                min: 8
+                minMessage: "Hasło nie może być krótsze niż {{ limit }} znaków."
+                
+NerdLab\BlogBundle\Form\Model\ForgottenPassword:
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+
+NerdLab\BlogBundle\Form\Model\Message:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                minMessage: "Imię nie może być krótsze niż {{ limit }} znaków."
+        subject:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                minMessage: "Temat nie może być krótszy niż {{ limit }} znaków."
+        email:
+            - NotBlank: ~
+            - Email:
+                message: Email "{{ value }}" nie jest prawidłowy.
+                checkMX: true
+                

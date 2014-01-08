@@ -1,0 +1,25 @@
+services:
+    sonata.admin.post:
+        class: NerdLab\BlogBundle\Admin\PostAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Post" }
+        arguments:  [null,  NerdLab\BlogBundle\Entity\Post, SonataAdminBundle:CRUD]
+        setTranslationDomain: NerdLabBlogBundle
+    sonata.admin.postsCategory:
+        class: NerdLab\BlogBundle\Admin\PostsCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Posts Category" }
+        arguments:  [null,  NerdLab\BlogBundle\Entity\PostsCategory, SonataAdminBundle:CRUD]
+        setTranslationDomain: NerdLabBlogBundle
+    sonata.admin.user:
+        class: NerdLab\BlogBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "User" }
+        arguments:  [null,  NerdLab\BlogBundle\Entity\User, SonataAdminBundle:CRUD]
+        setTranslationDomain: NerdLabBlogBundle
+    sonata.admin.role:
+        class: NerdLab\BlogBundle\Admin\RoleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: "Role" }
+        arguments:  [null,  NerdLab\BlogBundle\Entity\Role, SonataAdminBundle:CRUD]
+        setTranslationDomain: NerdLabBlogBundle

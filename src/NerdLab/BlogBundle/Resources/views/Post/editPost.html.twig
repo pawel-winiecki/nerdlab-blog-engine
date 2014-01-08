@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'NerdLabBlogBundle:Form:fields.html.twig' %}
+
+{% block title %}{% if post %}Edycja - {{ post.getTitle() }}{% else %}Stwórz nowy post{% endif %}{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+
+{% block main %}
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<legend>{{ legend }}</legend>
+{{ form_end(form) }}
+{% endblock %} 
+
+{% block javascripts %}
+<script src="{{ asset('js/lib/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('js/lib/tinymce/jquery.tinymce.min.js') }}"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea#form_longContent",
+        language: 'pl',
+        plugins: [
+            "code image"
+        ],
+        image_list: [
+            {% for image in images %}
+            {title: '{{ image.name }}', value: '/{{ image.getWebPath() }}' },               
+            {% endfor %}
+        ],
+        image_advtab: true,
+        browser_spellcheck : true
+    });
+</script>
+{% endblock %}

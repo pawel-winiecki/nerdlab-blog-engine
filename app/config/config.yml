@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @HomepageBlogBundle/Resources/config/admin.yml }
+    - { resource: @NerdLabBlogBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
@@ -75,7 +75,7 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 sonata_admin:
-    title:      Homepage Blog Bundle
+    title:      NerdLab Blog Bundle
     
 services:
     twig.extension.intl:
