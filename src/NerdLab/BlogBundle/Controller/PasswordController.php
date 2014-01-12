@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @license MIT
  */
 
 namespace NerdLab\BlogBundle\Controller;
@@ -15,18 +13,27 @@ use NerdLab\BlogBundle\Form\Model\ChangePassword;
 use NerdLab\BlogBundle\Form\Model\ForgottenPassword;
 
 /**
- * Description of PasswordController
+ * Controller for handlig user's password action.
  *
- * @author Paweł Winiecki
+ * @author Paweł Winiecki <pawel.winiecki@nerdlab.pl>
+ *
  */
 class PasswordController extends DefaultController {
 
+    /**
+     * Displays and handling change password form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from form.
+     * @param string $login | login of user.
+     * @return mixed | Rendering change password view page view or redirect to user page with communicate.
+     */
     public function changePswAction(Request $request, $login) {
+        
         $em = $this->getDoctrine()->getManager();
-
         $user = $em->getRepository('NerdLabBlogBundle:User')->findOneByLogin($login);
 
-        $this->DeniedIfCurrentUser($user);
+        $this->DeniedIfNotCurrentUser($user);
 
         $password = new ChangePassword();
 
@@ -70,6 +77,13 @@ class PasswordController extends DefaultController {
         return $this->render('NerdLabBlogBundle:Password:changePsw.html.twig', $view);
     }
 
+    /**
+     * Displays and handling forgotten password form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from form.
+     * @return mixed | Rendering change password page view or redirect to user page with communicate.
+     */
     public function forgottenPswAction(Request $request) {
         if ($this->get('security.context')->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('nerdlab_blog_index'));
@@ -117,6 +131,13 @@ class PasswordController extends DefaultController {
         return $this->render('NerdLabBlogBundle:Password:forgottenPsw.html.twig', $view);
     }
 
+    /**
+     * Displays and handling reset password form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from form.
+     * @return mixed | Rendering change password view page view or redirect to user page with communicate.
+     */
     public function resetPswAction(Request $request) {
         if ($this->get('security.context')->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('nerdlab_blog_index'));
@@ -191,6 +212,12 @@ class PasswordController extends DefaultController {
         }
     }
 
+    /**
+     * Create and send email to user.
+     * 
+     * @access public
+     * @param User $user | addressee of email.
+     */
     private function sendResetPswEmail(User $user) {
         $view = array();
         $view['login'] = $user->getLogin();

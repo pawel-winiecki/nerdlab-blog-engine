@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @license MIT
+ */
+
 namespace NerdLab\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,64 +11,62 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User
+ * User class 
  */
 class User implements AdvancedUserInterface, \Serializable {
 
     /**
-     * @var integer
+     * @var integer | id of database entry.
      */
     private $id;
 
     /**
-     * @var string
+     * @var string | user's login. Persist in DB.
      */
     private $login;
 
     /**
-     * @var string
+     * @var string | user's email. Persist in DB.
      */
     private $email;
 
     /**
-     * @var string
+     * @var string | password's hash. Persist in DB.
      */
     private $password;
 
     /**
-     * @var string
+     * @var string | password's salt. Persist in DB.
      */
     private $salt;
 
     /**
-     * Plain password. Used for model validation. Must not be persisted.
-     *
-     * @var string
+     * @var string | Plain password. Used for model validation. Not persist in DB.
      */
     protected $plainPassword;
 
     /**
-     * @var string
+     * @var string | User's first name. Persist in DB.
      */
     private $firstName;
 
     /**
-     * @var string
+     * @var string | User's last name. Persist in DB.
      */
     private $lastName;
 
     /**
-     * @var string
+     * @var string | Author's link to Google+ Profile. Persist in DB.
      */
     private $googlePlusLink;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | User's joind time. Persist in DB.
      */
     private $createdOn;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Time of last user update. Persist in DB.
      */
     private $updatedOn;
 
@@ -74,12 +76,12 @@ class User implements AdvancedUserInterface, \Serializable {
     private $passwordRequestedAt;
 
     /**
-     * @var boolean
+     * @var boolean | True if account is active. Persist in DB.
      */
     private $isActive;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \Doctrine\Common\Collections\Collection | Collection of user's roles. Persist in DB.
      */
     private $role;
 
@@ -361,26 +363,60 @@ class User implements AdvancedUserInterface, \Serializable {
         return $this->role;
     }
 
+    /**
+     * Method from UserInterface. Not implemented.
+     * @see Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
+     */
     public function eraseCredentials() {
         
     }
 
+    /**
+     * Method from UserInterface.
+     * 
+     * @see Symfony\Component\Security\Core\User\UserInterface::getRoles()
+     * @return array | User's roles
+     */
     public function getRoles() {
         return $this->role->toArray();
     }
 
+    /**
+     * Get salt. Method from UserInterface.
+     * 
+     * @see Symfony\Component\Security\Core\User\UserInterface::getSalt() 
+     * @return string
+     */
     public function getSalt() {
         return $this->salt;
     }
 
+    /**
+     * Get username. Return user's login. Method from UserInterface.
+     * 
+     * @see Symfony\Component\Security\Core\User\UserInterface::getUsername() 
+     * @return string
+     */
     public function getUsername() {
         return $this->login;
     }
 
+    /**
+     * Get isAccountNonExpired. Method from UserInterface. Not implemented.
+     * 
+     * @see Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonExpired() 
+     * @return boolean
+     */
     public function isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * Get isAccountNonLocked. Method from UserInterface. Not implemented.
+     * 
+     * @see Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonLocked() 
+     * @return boolean
+     */
     public function isAccountNonLocked() {
         return true;
     }
@@ -389,6 +425,12 @@ class User implements AdvancedUserInterface, \Serializable {
         return true;
     }
 
+    /**
+     * Get isEnabled. Return isActive. Method from UserInterface.
+     * 
+     * @see Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonLocked() 
+     * @return boolean
+     */
     public function isEnabled() {
         return $this->isActive;
     }
@@ -421,6 +463,9 @@ class User implements AdvancedUserInterface, \Serializable {
     }
 
     /**
+     * Method generate user name to show from firs or/and last name. 
+     * If they aren't set return login.
+     * 
      * @return string
      */
     public function getNameToShow() {

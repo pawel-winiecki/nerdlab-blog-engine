@@ -5,42 +5,42 @@ namespace NerdLab\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PostsCategory
+ * PostsCategory represents posts category. Every post is in one category.
  */
 class PostsCategory
 {
     /**
-     * @var integer
+     * @var integer | id of database entry.
      */
     private $id;
 
     /**
-     * @var string
+     * @var string | Name of category.
      */
     private $categoryName;
 
     /**
-     * @var string
+     * @var string | slug of category.
      */
     private $link;
 
     /**
-     * @var string
+     * @var string | description of category. Use in meta-description.
      */
     private $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of category create. Persist in DB.
      */
     private $createdOn;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of category update. Persist in DB.
      */
     private $updatedOn;
 
     /**
-     * @var boolean
+     * @var boolean | True if category is active. Persist in DB.
      */
     private $isActive;
 

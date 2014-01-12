@@ -19,10 +19,20 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class UserController extends DefaultController {
 
+    /**
+     * View information about user.
+     * 
+     * @access public
+     * @param string $login | slug of post.
+     * @return Response | Renders view NerdLabBlogBundle:User:viewUser.html.twig
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException | thrown if user doesn't exist.
+     * @todo pagination of user's 
+     */
     public function viewAction($login) {
-        $view = array();
 
+        $view = array();
         $view['user'] = $this->getDoctrine()->getRepository('NerdLabBlogBundle:User')->findOneByLogin($login);
+     
         
         if(!$view['user']) {
             throw $this->createNotFoundException('Nie ma takiego użytkownika');
@@ -34,14 +44,22 @@ class UserController extends DefaultController {
             $view['isClientUser'] = false;
         }
 
-        //$view['isAuthor'] = $view['user']->hasRole('ROLE_AUTHOR');
-
         $view['comments'] = $this->getDoctrine()->getRepository('NerdLabBlogBundle:Comment')->findByUser($view['user'], null, array('createdOn' => 'ASC'));
         $view['posts'] = $this->getDoctrine()->getRepository('NerdLabBlogBundle:Post')->findByUser($view['user']);
 
         return $this->render('NerdLabBlogBundle:User:viewUser.html.twig', $view);
     }
     
+    /**
+     * View information about author.
+     * 
+     * @access public
+     * @param string $login | slug of post.
+     * @return Response | Renders view NerdLabBlogBundle:User:viewUser.html.twig
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException | thrown if user doesn't exist 
+     * or user isn't author.
+     * @todo pagination of author's posts and comments
+     */
     public function viewAuthorAction($login) {
         $view = array();
         
@@ -60,7 +78,16 @@ class UserController extends DefaultController {
         return $this->render('NerdLabBlogBundle:User:viewAuthor.html.twig', $view);
     }
 
+    /**
+     * Views and handles registeration form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from registeration form.
+     * @return Response | Renders view NerdLabBlogBundle:User:viewUser.html.twig
+     */
     public function createAction(Request $request) {
+        
+        // loged user can't create account.
         if ($this->get('security.context')->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('nerdlab_blog_index'));
         }
@@ -165,7 +192,7 @@ class UserController extends DefaultController {
 
         $user = $em->getRepository('NerdLabBlogBundle:User')->findOneByLogin($login);
 
-        $this->DeniedIfCurrentUser($user);
+        $this->DeniedIfNotCurrentUser($user);
 
         $view = array();
 

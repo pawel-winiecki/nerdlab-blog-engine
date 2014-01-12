@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * @license MIT
+ */
+
 namespace NerdLab\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * This class represents user's comments of posts.
  */
 class Comment
 {

@@ -5,62 +5,62 @@ namespace NerdLab\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Post
+ * Post represent blog entry.
  */
 class Post {
 
     /**
-     * @var integer
+     * @var integer | id of database entry.
      */
     private $id;
 
     /**
-     * @var string
+     * @var string | slug of post. Persist in Database.
      */
     private $link;
 
     /**
-     * @var string
+     * @var string | title of post. Persist in Database.
      */
     private $title;
 
     /**
-     * @var string
+     * @var string | short content is used as: lead, meta-description, short conentent on main/category page. Persist in Database.
      */
     private $shortContent;
 
     /**
-     * @var string
+     * @var string | whole content of post (without lead/short content). Persist in Database.
      */
     private $longContent;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of post create. Persist in DB.
      */
     private $createdOn;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of post update. Persist in DB.
      */
     private $updatedOn;
 
     /**
-     * @var boolean
+     * @var boolean | True if post should be shown. Persist in DB.
      */
     private $isActive;
 
     /**
-     * @var \NerdLab\BlogBundle\Entity\PostsCategory
+     * @var \NerdLab\BlogBundle\Entity\PostsCategory | Category of post. Persist in DB.
      */
     private $postsCategory;
 
     /**
-     * @var \NerdLab\BlogBundle\Entity\User
+     * @var \NerdLab\BlogBundle\Entity\User | Author of post. Persist in DB.
      */
     private $user;
 
     /**
-     * @var \NerdLab\BlogBundle\Entity\ImageFile
+     * @var \NerdLab\BlogBundle\Entity\ImageFile | Miniature for post.
      */
     private $imageFile;
 
@@ -84,7 +84,10 @@ class Post {
 
         return $this;
     }
-
+    
+    /**
+     * This method generate and set slug for friendly URL.
+     */
     public function generateLinkFromTitle() {
         //remowe whitspace atd begin and end of string
         $link = trim($this->title);

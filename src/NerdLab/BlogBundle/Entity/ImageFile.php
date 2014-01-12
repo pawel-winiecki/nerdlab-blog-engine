@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @license MIT
  */
 
 namespace NerdLab\BlogBundle\Entity;
@@ -19,32 +17,32 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ImageFile {
 
     /**
-     * @var integer
+     * @var integer | id of database entry.
      */
     private $id;
 
     /**
-     * @var string
+     * @var string | image's name. Using for alt atribute. Persist in DB.
      */
     private $name;
 
     /**
-     * @var string
+     * @var string | image's path (name + extension). Using for generate full and web path. Persist in DB.
      */
     private $path;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Time of file upload. Persist in DB.
      */
     private $createdOn;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Time of file or db entry update. Persist in DB.
      */
     private $updatedOn;
 
     /**
-     * @var Symfony\Component\HttpFoundation\File\UploadedFile
+     * @var Symfony\Component\HttpFoundation\File\UploadedFile | Using during upload and save process. Not persist in DB.
      */
     private $file;
     private $temp;
@@ -133,24 +131,44 @@ class ImageFile {
         return $this->updatedOn;
     }
 
+    /**
+     * Get absloute path to image.
+     *
+     * @return string 
+     */
     public function getAbsolutePath() {
         return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
     }
 
+    /**
+     * Get web path to image.
+     *
+     * @return string 
+     */
     public function getWebPath() {
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
 
+    /**
+     * Get upload root directory
+     *
+     * @return string 
+     */
     protected function getUploadRootDir() {
         // the absolute directory path where uploaded
         // documents should be saved
         return __DIR__ . '/../../../../web/' . $this->getUploadDir();
     }
 
+    /**
+     * Get upload directory
+     *
+     * @return string 
+     */
     protected function getUploadDir() {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/images'. $this->createdOn->format('/Y/m');
+        return 'uploads/images' . $this->createdOn->format('/Y/m');
     }
 
     /**
@@ -179,6 +197,9 @@ class ImageFile {
         return $this->file;
     }
 
+    /**
+     * Staff doing before file upload.
+     */
     public function preUpload() {
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
@@ -204,8 +225,10 @@ class ImageFile {
         }
     }
 
-    public
-            function upload() {
+    /**
+     * Staff doing during file upload.
+     */
+    public function upload() {
         if (null === $this->getFile()) {
             return;
         }
@@ -225,12 +248,20 @@ class ImageFile {
         $this->file = null;
     }
 
+    /**
+     * Staff when entry are removing from DB
+     */
     public function removeUpload() {
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
     }
-    
+
+    /**
+     * Required by form builder.
+     * 
+     * @return string
+     */
     public function __toString() {
         return $this->name;
     }

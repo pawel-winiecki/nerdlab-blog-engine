@@ -11,32 +11,32 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 class Role implements RoleInterface
 {
     /**
-     * @var integer
+     * @var integer | id of database entry.
      */
     private $id;
 
     /**
-     * @var string
+     * @var string | Role name. Symfony2 require 'ROLE_' at begining. Persist in DB.
      */
     private $roleName;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of role create. Persist in DB.
      */
     private $createdOn;
 
     /**
-     * @var \DateTime
+     * @var \DateTime | Date of role update. Persist in DB.
      */
     private $updatedOn;
 
     /**
-     * @var boolean
+     * @var boolean | True if role is active. Persist in DB.
      */
     private $isActive;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \Doctrine\Common\Collections\Collection | Collection of with this role. Persist in DB.
      */
     private $user;
 

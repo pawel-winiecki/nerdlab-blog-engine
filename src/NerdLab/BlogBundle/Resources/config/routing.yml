@@ -1,15 +1,19 @@
 nerdlab_blog_index:
     pattern:  /
-    defaults: { _controller: NerdLabBlogBundle:Blog:index, page:0 }
+    defaults: { _controller: NerdLabBlogBundle:Blog:index, page:1 }
 nerdlab_blog_index_page:
     pattern:  /page/{page}/
     defaults: { _controller: NerdLabBlogBundle:Blog:index }
+    requirements:
+        page:  \d+
 nerdlab_blog_category:
     pattern:  /category/{category}/
-    defaults: { _controller: NerdLabBlogBundle:Blog:index, page:0 }
+    defaults: { _controller: NerdLabBlogBundle:Blog:index, page:1 }
 nerdlab_blog_category_page:
     pattern:  /category/{category}/page/{page}/
     defaults: { _controller: NerdLabBlogBundle:Blog:index }
+    requirements:
+        page:  \d+
     
 nerdlab_blog_user_edit:
     pattern:  /user/{login}/edit/

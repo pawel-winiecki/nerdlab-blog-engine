@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @license MIT
  */
 
 namespace NerdLab\BlogBundle\Controller;
@@ -15,12 +13,21 @@ use NerdLab\BlogBundle\Entity\Comment;
 use NerdLab\BlogBundle\Entity\Post;
 
 /**
- * Description of PostsController
+ * Controller for handlig post actions.
  *
- * @author Paweł Winiecki
+ * @author Paweł Winiecki <pawel.winiecki@nerdlab.pl>
+ *
  */
 class PostController extends Controller {
 
+    /**
+     * Display post page and handle 'add comment' form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from 'add comment' form.
+     * @param string $link | slug of post.
+     * @return Response | Renders view NerdLabBlogBundle:Post:post.html.twig
+     */
     public function showPostAction(Request $request, $link) {
         $em = $this->getDoctrine()->getManager();
 
@@ -57,6 +64,13 @@ class PostController extends Controller {
         return $this->render('NerdLabBlogBundle:Post:post.html.twig', $view);
     }
 
+    /**
+     * Displays and handling create post form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from create post form.
+     * @return mixed | Rendering create post page view or redirect to post page with communicate.
+     */
     public function createPostAction(Request $request) {
         $post = new Post();
         $form = $this->createPostForm($post, $this->generateUrl('nerdlab_blog_post_create'), 'Stwórz post');
@@ -86,12 +100,20 @@ class PostController extends Controller {
         $view['form'] = $form->createView();
         $view['legend'] = 'Stworzenie nowego postu';
         $view['post'] = $post;
-        
+
         $view['images'] = $this->createImagesCollection();
 
         return $this->render('NerdLabBlogBundle:Post:editPost.html.twig', $view);
     }
 
+    /**
+     * Displays and handling create post form.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from create post form.
+     * @param string $link | slug of post.
+     * @return mixed | Rendering create post page view or redirect to post page with communicate.
+     */
     public function editPostAction(Request $request, $link) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('NerdLabBlogBundle:Post')->findOneByLink($link);
@@ -116,12 +138,19 @@ class PostController extends Controller {
         $view['form'] = $form->createView();
         $view['legend'] = 'Edycja postu';
         $view['post'] = $post;
-        
+
         $view['images'] = $this->createImagesCollection();
 
         return $this->render('NerdLabBlogBundle:Post:editPost.html.twig', $view);
     }
 
+    /**
+     * Displays list of newest post.
+     * 
+     * @access public
+     * @param integer $max | number of newest posts to show.
+     * @return Response | Renders view NerdLabBlogBundle:Post:_latestPosts.html.twig
+     */
     function latestPostsAction($max) {
         $view = array();
 
@@ -133,6 +162,13 @@ class PostController extends Controller {
         return $this->render('NerdLabBlogBundle:Post:_latestPosts.html.twig', $view);
     }
 
+    /**
+     * Displays list of newest comments.
+     * 
+     * @access public
+     * @param integer $max | number of newest comments to show.
+     * @return Response | Renders view NerdLabBlogBundle:Post:_latestComments.html.twig
+     */
     function latestCommentsAction($max) {
         $view = array();
 
@@ -144,11 +180,20 @@ class PostController extends Controller {
         return $this->render('NerdLabBlogBundle:Post:_latestComments.html.twig', $view);
     }
 
+    /**
+     * create form for create/editin post.
+     * 
+     * @access public
+     * @param Post $post | object for creating post.
+     * @param string $actionUrl | url for action.
+     * @param string $label | text to show on submit button.
+     * @return Symfony\Component\Form\Form | form for creating/edit post.
+     */
     private function createPostForm(Post $post, $actionUrl, $label) {
         return $this->createFormBuilder($post)
                         ->setAction($actionUrl)
                         ->add('title', 'text', array('label' => 'Tytuł'))
-                        ->add('isActive', 'checkbox', array('label' => 'Opublikowany'))
+                        ->add('isActive', 'checkbox', array('required' => false, 'label' => 'Opublikowany'))
                         ->add('postsCategory', 'entity', array(
                             'label' => 'Kategoria',
                             'class' => 'NerdLabBlogBundle:PostsCategory',
@@ -171,14 +216,28 @@ class PostController extends Controller {
                         ->getForm();
     }
 
+    /**
+     * Displays list of newest comments.
+     * 
+     * @access public
+     * @param Comment $comment | object for creating comment.
+     * @param string $actionUrl | url for action.
+     * @return Symfony\Component\Form\Form | form for creating comment.
+     */
     private function createCommentForm(Comment $comment, $link) {
         return $this->createFormBuilder($comment)
                         ->setAction($this->generateUrl('nerdlab_blog_post', array('link' => $link)))
-                        ->add('content', 'textarea', array('attr' => array('placeholder'=>'Skomentuj...','title'=>'Skomentuj...')))
+                        ->add('content', 'textarea', array('attr' => array('placeholder' => 'Skomentuj...', 'title' => 'Skomentuj...')))
                         ->add('save', 'submit', array('label' => 'Dodaj komentarz'))
                         ->getForm();
     }
-    
+
+    /**
+     * create array of all uploaded images.
+     * 
+     * @access public
+     * @return array | The uploaded images.
+     */
     private function createImagesCollection() {
         return $this->getDoctrine()->getRepository('NerdLabBlogBundle:ImageFile')->findAll();
     }

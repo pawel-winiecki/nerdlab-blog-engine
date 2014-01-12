@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @license MIT
  */
 
 namespace NerdLab\BlogBundle\Controller;
@@ -13,12 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use NerdLab\BlogBundle\Form\Model\Message;
 
 /**
- * Description of ContactController
+ * ContactController handling contact form and send email with message
+ * to kontakt@nerdlab.pl
  *
- * @author Paweł Winiecki
+ * @author Paweł Winiecki <pawel.winiecki@nerdlab.pl>
  */
 class ContactController extends Controller {
 
+    /**
+     * Displays main blog page if $category is null otherwise displays category page.
+     * Displayed blog entries list is limited by $_limit value.
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from form.
+     * @return mixed | Rendering contact page view or redirect to main page if send email.
+     */
     public function contactAction(Request $request) {
         $message = new Message();
         $form = $this->createFormBuilder($message)
@@ -32,8 +39,10 @@ class ContactController extends Controller {
 
         $form->handleRequest($request);
 
+        // checking for valid (validation is describe in validation.yml) submited form
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            // creating mail to send
             $mail = \Swift_Message::newInstance()
                     ->setSubject($message->getSubject() . ' - Formularz kontaktowy')
                     ->setFrom($message->getEmail())
@@ -44,6 +53,7 @@ class ContactController extends Controller {
                         'content' => nl2br(strip_tags($message->getContent())))), 'text/html');
             $this->get('mailer')->send($mail);
 
+            // adding succes message to show on main page
             $this->get('session')->getFlashBag()->add(
                     'success-notice', 'Wiadomość została wysłana.'
             );

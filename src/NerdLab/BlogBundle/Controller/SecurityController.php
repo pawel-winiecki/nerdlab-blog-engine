@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @license MIT
  */
 
 namespace NerdLab\BlogBundle\Controller;
@@ -12,13 +10,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
 /**
- * Description of SecurityController
+ * Controller for handlig login actions.
  *
- * @author Paweł Winiecki
+ * @author Paweł Winiecki <pawel.winiecki@nerdlab.pl>
+ *
  */
 class SecurityController extends Controller {
-    public function loginAction() {
-        $request = $this->getRequest();
+    
+    /**
+     * Displays and handles login form. 
+     * 
+     * @access public
+     * @param Request $request | Request object is used for collect data from login form.
+     * @return Response | Renders view NerdLabBlogBundle:Security:login.html.twig
+     */
+    public function loginAction(Request $request) {
+        
+        // log in user cant' log again.
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            return $this->redirect($this->generateUrl('nerdlab_blog_index'));
+        }
+        
         $session = $request->getSession();
 
         // get the login error if there is one
@@ -31,13 +43,10 @@ class SecurityController extends Controller {
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render(
-            'NerdLabBlogBundle:Security:login.html.twig',
-            array(
-                // last username entered by the user
-                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                'error'         => $error,
-            )
-        );        
+        $view = array();
+        $view['last_username'] = $session->get(SecurityContext::LAST_USERNAME);
+        $view['error'] = $error;
+        
+        return $this->render('NerdLabBlogBundle:Security:login.html.twig',$view);        
     }
 }

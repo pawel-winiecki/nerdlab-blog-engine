@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}{% if postsCategory is defined %}{{ postsCategory.getCategoryName() }}{% else %}Blog o wszystkim co nerdowskie{% endif %}{% if currentPage > 0 %} - strona {{ currentPage }}{% endif %}{% endblock %}
+{% block title %}{% if postsCategory is defined %}{{ postsCategory.getCategoryName() }}{% else %}Blog o wszystkim co nerdowskie{% endif %}{% if currentPage > 1 %} - strona {{ currentPage }}{% endif %}{% endblock %}
 
 
 {% block description %}{% if postsCategory is defined %}{{ postsCategory.description }}{% else %}NerdLab.pl to blog poświęcony nowościom technologicznym, grom planszowym, mobilnym i komputerowym oraz wszystkiemu co może zainteresować Nerda.{% endif %}{% endblock %}
