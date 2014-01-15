@@ -58,7 +58,11 @@
                         {% set nextPath = path('nerdlab_blog_category_page', 
                                                 {'page': currentPage - 1, 'category': postsCategory.getLink()}) %}
                     {% else %}
-                        {% set nextPath = path('nerdlab_blog_index_page', {'page': currentPage - 1}) %}
+                        {%if currentPage - 1 > 1 %} 
+                            {% set nextPath = path('nerdlab_blog_index_page', {'page': currentPage - 1}) %}
+                        {% else %}
+                            {% set nextPath = path('nerdlab_blog_index') %}
+                        {% endif %}
                     {% endif %}
         <li class="next">
             <a href="{{ nextPath }}" >Następne wpisy</a>

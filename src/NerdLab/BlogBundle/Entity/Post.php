@@ -87,6 +87,8 @@ class Post {
     
     /**
      * This method generate and set slug for friendly URL.
+     * 
+     * @return string generetaed post slug.
      */
     public function generateLinkFromTitle() {
         //remowe whitspace atd begin and end of string
@@ -105,9 +107,9 @@ class Post {
         $link = iconv("utf-8", "ascii//TRANSLIT", $link);
 
         //remove special characters
-        $link = preg_replace('/[^a-z0-9\-]/', '', $link);
-
-        $this->link = $link;
+        $this->link = preg_replace('/[^a-z0-9\-]/', '', $link);
+        
+        return $this->link;
     }
 
     /**
