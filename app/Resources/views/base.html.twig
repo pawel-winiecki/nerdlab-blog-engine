@@ -12,11 +12,8 @@
         <meta name="description" content="{% block description %}{% endblock %}" />
         {% block metatags %}{% endblock %}
 
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-
-        <!-- My own changes in bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+        <!-- main css stylesheet creating with  -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.min.css') }}">
         {% block stylesheets %}{% endblock %}
 
         <meta name="robots" content="{% block robots %}index, follow{% endblock %}"/>
@@ -105,9 +102,9 @@
         ================================================== -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="{{ asset('js/lib/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-        <script src="{{ asset('js/cookies.js') }}"></script>
+        <script src="{{ asset('js/cookies.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
         <script>
             (function(i, s, o, g, r, a, m) {

@@ -1,0 +1,27 @@
+{
+  "name": "NerdLabBlogEngine",
+  "version": "0.0.2",
+  "description": "Simple blog engine created with Symfony2.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pawel-winiecki/nerdlab-blog-engine"
+  },
+  "author": "Paweł Winiecki <pawel.winiecki.nerdlab.pl>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "1bc2163af7aeebe8b6fad484ecf6384507ba7daf",
+  "dependencies": {
+    "bower": "~1.2.8",
+    "grunt": "~0.4.2",
+    "grunt-contrib-less": "~0.9.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-copy": "~0.5.0"
+  }
+}

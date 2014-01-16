@@ -11,6 +11,18 @@ Requirements
 [TWIG](http://twig.sensiolabs.org/)
 [Sonata Admin Bundle](http://sonata-project.org/bundles/admin/master/doc/index.html)
 
+FrontEnd Library
+----------------------------------
+[Twitter Bootstrap](http://getbootstrap.com/)
+[TinyMCE](http://www.tinymce.com/)
+[Lightbox2](http://lokeshdhakar.com/projects/lightbox2/)
+
+Tools used only in development
+----------------------------------
+
+[Grunt](http://gruntjs.com/)
+[Bower](http://bower.io/)
+
 License
 --------
 NerdLab Blog Engine is licensed under MIT license.

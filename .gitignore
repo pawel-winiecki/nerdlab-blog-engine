@@ -8,3 +8,5 @@
 /app/config/parameters.yml
 /app/config/security.yml
 /web/uploads/
+/src/NerdLab/BlogBundle/Resources/assets/vendor/
+/node_modules/

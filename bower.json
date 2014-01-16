@@ -1,0 +1,23 @@
+{
+  "name": "NerdLabBlogEngine",
+  "version": "0.0.2",
+  "homepage": "https://github.com/pawel-winiecki/nerdlab-blog-engine",
+  "authors": [
+    "Paweł Winiecki <pawel.winiecki.nerdlab.pl>"
+  ],
+  "description": "Simple blog engine created with Symfony2.",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3"
+  }
+}

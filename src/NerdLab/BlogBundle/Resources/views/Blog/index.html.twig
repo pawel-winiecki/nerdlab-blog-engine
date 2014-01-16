@@ -40,8 +40,8 @@
     </li>
         {% endfor %}
 </ul>
-<div class="pagination-container">
-    <ul class="pager">
+
+<ul class="pager">
                 {% if hasPreviousPosts %}
                     {% if postsCategory is defined %}
                         {% set previousPath = path('nerdlab_blog_category_page', 
@@ -49,9 +49,9 @@
                     {% else %}
                         {% set previousPath = path('nerdlab_blog_index_page', {'page': currentPage + 1}) %}
                     {% endif %}
-        <li class="previous" >
-            <a href="{{ previousPath }}" >Poprzednie wpisy</a>
-        </li>
+    <li class="previous" >
+        <a href="{{ previousPath }}" >Poprzednie wpisy</a>
+    </li>
                 {% endif %}
                 {% if hasNextPosts %}
                     {% if postsCategory is defined %}
@@ -64,12 +64,11 @@
                             {% set nextPath = path('nerdlab_blog_index') %}
                         {% endif %}
                     {% endif %}
-        <li class="next">
-            <a href="{{ nextPath }}" >Następne wpisy</a>
-        </li>
+    <li class="next">
+        <a href="{{ nextPath }}" >Następne wpisy</a>
+    </li>
                 {% endif %}
-    </ul>
-</div><!--end container -->
+</ul>
     {% else %}
 <p>Nie ma postów</p>
     {% endif %}
